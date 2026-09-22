@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up | MindBloom{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-decoration">
+        <div class="auth-message">
+            <span class="auth-leaf">🌱</span>
+
+            <p class="eyebrow">WELCOME TO MINDBLOOM</p>
+
+            <h1>
+                Your journey can<br>
+                start <span>here.</span>
+            </h1>
+
+            <p>
+                Create your personal space to track your mood,
+                understand your behaviours and follow your progress.
+            </p>
+
+            <div class="support-note">
+                ♡ Small steps still count.
+            </div>
+        </div>
+    </div>
+
+
+    <div class="auth-form-container">
+
+        <div class="auth-form-header">
+            <p class="eyebrow">CREATE YOUR ACCOUNT</p>
+            <h2>Join MindBloom</h2>
+            <p>Fill in your details to get started.</p>
+        </div>
+
+        <form class="auth-form">
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                >
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Choose a username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input
+                        type="date"
+                        id="dob"
+                        name="date_of_birth"
+                    >
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                >
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+
+                    <select id="gender" name="gender">
+                        <option value="">Select gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Other">Other</option>
+                        <option value="Prefer not to say">
+                            Prefer not to say
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Contact Number</label>
+                    <input
+                        type="tel"
+                        id="contact"
+                        name="contact_number"
+                        placeholder="e.g. 0712345678"
+                    >
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Enter your password again"
+                >
+            </div>
+
+            <button type="submit" class="btn btn-primary auth-button">
+                Create Account →
+            </button>
+
+            <p class="auth-switch">
+                Already have an account?
+                <a href="#">Log in</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

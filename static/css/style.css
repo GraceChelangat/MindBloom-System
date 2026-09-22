@@ -385,6 +385,203 @@ a {
     color: var(--green);
 }
 
+/* ================================
+   Authentication Pages
+================================ */
+
+.auth-section {
+    min-height: calc(100vh - 180px);
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    background: var(--cream);
+}
+
+.auth-decoration {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 70px;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 250, 242, 0.7),
+            transparent 30%
+        ),
+        var(--sage-light);
+}
+
+.auth-decoration::before {
+    content: "🌿";
+    position: absolute;
+    left: -25px;
+    bottom: 20px;
+    font-size: 150px;
+    opacity: 0.25;
+    transform: rotate(-15deg);
+}
+
+.auth-decoration::after {
+    content: "🌱";
+    position: absolute;
+    right: 25px;
+    top: 35px;
+    font-size: 75px;
+    opacity: 0.2;
+}
+
+.auth-message {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+}
+
+.auth-leaf {
+    display: inline-grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    background: rgba(255, 250, 242, 0.75);
+    font-size: 30px;
+}
+
+.auth-message h1 {
+    margin-bottom: 25px;
+    color: var(--green-dark);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(45px, 5vw, 65px);
+    font-weight: 500;
+    line-height: 1.05;
+}
+
+.auth-message h1 span {
+    color: #c77e63;
+    font-style: italic;
+}
+
+.auth-message > p:not(.eyebrow) {
+    max-width: 430px;
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.support-note {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 13px 20px;
+    border-radius: 30px;
+    color: var(--green-dark);
+    background: rgba(255, 250, 242, 0.75);
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+
+/* Sign Up Form */
+
+.auth-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 65px 10%;
+    background: var(--white);
+}
+
+.auth-form-header {
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto 30px;
+}
+
+.auth-form-header h2 {
+    margin-bottom: 7px;
+    color: var(--green-dark);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 38px;
+    font-weight: 500;
+}
+
+.auth-form-header > p:last-child {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.auth-form {
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--green-dark);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 48px;
+    padding: 0 15px;
+    border: 1px solid #dedbd3;
+    border-radius: 8px;
+    outline: none;
+    background: #fffdf9;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #a5aca8;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--sage);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(168, 195, 160, 0.18);
+}
+
+.auth-button {
+    width: 100%;
+    margin-top: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.auth-switch {
+    margin-top: 22px;
+    color: var(--muted);
+    text-align: center;
+    font-size: 13px;
+}
+
+.auth-switch a {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.auth-switch a:hover {
+    color: var(--green-dark);
+}
+
 
 /* ================================
    Responsive
@@ -394,6 +591,52 @@ a {
 
     .nav-links {
         display: none;
+
+    .auth-section {
+    grid-template-columns: 1fr;
+}
+
+.auth-decoration {
+    min-height: 420px;
+    padding: 55px 10%;
+    text-align: center;
+}
+
+.auth-message {
+    margin: auto;
+}
+
+.auth-message > p:not(.eyebrow) {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.auth-form-container {
+    padding: 55px 8%;
+}
+    }
+
+    .auth-section {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-decoration {
+        min-height: 420px;
+        padding: 55px 10%;
+        text-align: center;
+    }
+
+    .auth-message {
+        margin: auto;
+    }
+
+    .auth-message > p:not(.eyebrow) {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .auth-form-container {
+        padding: 55px 8%;
     }
 
     .hero {
