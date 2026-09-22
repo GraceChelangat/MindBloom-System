@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Log In | MindBloom{% endblock %}
+
+{% block content %}
+
+<section class="auth-section login-section">
+
+    <div class="auth-decoration">
+        <div class="auth-message">
+
+            <span class="auth-leaf">🌱</span>
+
+            <p class="eyebrow">WELCOME BACK</p>
+
+            <h1>
+                Keep growing,<br>
+                one day at a <span>time.</span>
+            </h1>
+
+            <p>
+                Return to your personal space to continue tracking
+                your mood, behaviours and progress.
+            </p>
+
+            <div class="support-note">
+                ♡ Every check-in is a step forward.
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="auth-form-container">
+
+        <div class="auth-form-header">
+            <p class="eyebrow">WELCOME BACK</p>
+            <h2>Log in to MindBloom</h2>
+            <p>Enter your account details to continue.</p>
+        </div>
+
+        <form class="auth-form">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="password">Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                >
+            </div>
+
+
+            <div class="login-options">
+
+                <label class="remember-me">
+                    <input type="checkbox" name="remember">
+                    <span>Remember me</span>
+                </label>
+
+                <a href="#" class="forgot-password">
+                    Forgot password?
+                </a>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary auth-button"
+            >
+                Log In →
+            </button>
+
+
+            <p class="auth-switch">
+                Don't have an account?
+                <a href="{% url 'signup' %}">Create an account</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

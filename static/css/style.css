@@ -582,6 +582,40 @@ a {
     color: var(--green-dark);
 }
 
+/* ================================
+   Login Page
+================================ */
+
+.login-options {
+    margin: 5px 0 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.remember-me input {
+    accent-color: var(--green);
+}
+
+.forgot-password {
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.forgot-password:hover {
+    color: var(--green-dark);
+}
 
 /* ================================
    Responsive
