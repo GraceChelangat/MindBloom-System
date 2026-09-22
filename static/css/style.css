@@ -1,0 +1,470 @@
+/* ================================
+   MindBloom Global Styles
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cream: #fffaf2;
+    --cream-dark: #f7f0e4;
+    --sage: #a8c3a0;
+    --sage-light: #dfead9;
+    --green: #416b57;
+    --green-dark: #294d3d;
+    --peach: #efb69f;
+    --peach-light: #f8ded2;
+    --text: #3f5148;
+    --muted: #718078;
+    --white: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ================================
+   Navigation
+================================ */
+
+.navbar {
+    min-height: 90px;
+    padding: 18px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background: rgba(255, 250, 242, 0.96);
+    border-bottom: 1px solid #ebe3d7;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-mark {
+    width: 45px;
+    height: 45px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--sage-light);
+    font-size: 24px;
+}
+
+.brand-name {
+    display: block;
+    color: var(--green-dark);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.brand-tagline {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+}
+
+.nav-links a {
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--green);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 12px;
+}
+
+
+/* ================================
+   Buttons
+================================ */
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-height: 43px;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    color: var(--white);
+    background: var(--green);
+    border: 1px solid var(--green);
+    box-shadow: 0 8px 20px rgba(65, 107, 87, 0.15);
+}
+
+.btn-primary:hover {
+    background: var(--green-dark);
+    border-color: var(--green-dark);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    color: var(--green);
+    background: transparent;
+    border: 1px solid var(--green);
+}
+
+.btn-outline:hover {
+    background: var(--sage-light);
+}
+
+
+/* ================================
+   Hero Section
+================================ */
+
+.hero {
+    min-height: 610px;
+    padding: 70px 9%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+
+    background:
+        radial-gradient(
+            circle at 80% 40%,
+            rgba(168, 195, 160, 0.18),
+            transparent 28%
+        ),
+        var(--cream);
+}
+
+.hero-content {
+    max-width: 590px;
+}
+
+.eyebrow {
+    margin-bottom: 18px;
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.hero h1 {
+    color: var(--green-dark);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(48px, 5vw, 75px);
+    font-weight: 500;
+    line-height: 1.03;
+    letter-spacing: -2px;
+}
+
+.hero h1 span {
+    color: var(--peach);
+    font-style: italic;
+}
+
+.hero-description {
+    max-width: 500px;
+    margin: 28px 0;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.hero-button {
+    min-width: 180px;
+}
+
+.small-message {
+    margin-top: 25px;
+    color: #8b968f;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+
+/* ================================
+   Hero Illustration
+================================ */
+
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.visual-circle {
+    position: relative;
+    width: min(470px, 90vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+        linear-gradient(
+            145deg,
+            var(--sage-light),
+            #c8dbc1
+        );
+    box-shadow: 0 30px 70px rgba(65, 107, 87, 0.12);
+}
+
+.hero-symbol {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 250, 242, 0.75);
+    font-size: 75px;
+    box-shadow: 0 15px 35px rgba(65, 107, 87, 0.1);
+}
+
+.plant {
+    position: absolute;
+    left: -25px;
+    bottom: 55px;
+    font-size: 80px;
+}
+
+.affirmation {
+    position: absolute;
+    padding: 14px 18px;
+    border-radius: 13px;
+    color: var(--green-dark);
+    background: rgba(255, 250, 242, 0.92);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 12px 30px rgba(65, 107, 87, 0.12);
+}
+
+.affirmation-one {
+    top: 40px;
+    left: -30px;
+}
+
+.affirmation-two {
+    top: 110px;
+    right: -20px;
+}
+
+.affirmation-three {
+    right: 5px;
+    bottom: 80px;
+}
+
+
+/* ================================
+   Features
+================================ */
+
+.features {
+    padding: 40px 9%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--white);
+    border-top: 1px solid #eee8df;
+    border-bottom: 1px solid #eee8df;
+}
+
+.feature {
+    min-height: 125px;
+    padding: 20px 38px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.feature + .feature {
+    border-left: 1px solid #e6e1d8;
+}
+
+.feature-icon {
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--sage-light);
+    color: var(--green);
+    font-size: 23px;
+}
+
+.feature-icon.peach {
+    background: var(--peach-light);
+    color: #b16f58;
+}
+
+.feature h2 {
+    margin-bottom: 5px;
+    color: var(--green-dark);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 21px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ================================
+   Footer
+================================ */
+
+.footer {
+    min-height: 90px;
+    padding: 25px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    background: var(--cream);
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-brand strong {
+    color: var(--green-dark);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 16px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 22px;
+}
+
+.footer-links a:hover {
+    color: var(--green);
+}
+
+
+/* ================================
+   Responsive
+================================ */
+
+@media (max-width: 900px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 55px;
+    }
+
+    .hero-content {
+        margin: auto;
+    }
+
+    .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .visual-circle {
+        width: min(390px, 80vw);
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .feature {
+        justify-content: center;
+    }
+
+    .feature + .feature {
+        border-left: none;
+        border-top: 1px solid #e6e1d8;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 15px 5%;
+    }
+
+    .brand-tagline {
+        display: none;
+    }
+
+    .nav-actions .btn {
+        padding: 8px 12px;
+    }
+
+    .hero {
+        padding: 50px 7%;
+    }
+
+    .hero h1 {
+        font-size: 46px;
+    }
+
+    .affirmation {
+        font-size: 11px;
+    }
+
+    .affirmation-one {
+        left: -5px;
+    }
+
+    .affirmation-two {
+        right: -5px;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}

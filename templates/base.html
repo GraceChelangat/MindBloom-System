@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}MindBloom{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="{% url 'home' %}" class="brand">
+            <div class="brand-mark">🌱</div>
+            <div>
+                <span class="brand-name">MindBloom</span>
+                <span class="brand-tagline">MINDS GROW HERE</span>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="{% url 'home' %}" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#resources">Resources</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="#" class="btn btn-outline">Log in</a>
+            <a href="#" class="btn btn-primary">Sign up</a>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-brand">
+            <strong>🌱 MindBloom</strong>
+            <span>Minds grow here.</span>
+        </div>
+
+        <p>Small steps. Brighter tomorrows.</p>
+
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+        </div>
+    </footer>
+
+</body>
+</html>
