@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% block title %}Nutrition & Lifestyle Questionnaire | MindBloom{% endblock %}
+
+{% block content %}
+
+<section class="questionnaire-section">
+
+    <div class="questionnaire-header">
+        <p class="eyebrow">NUTRITION &amp; LIFESTYLE</p>
+        <h1>Nutrition and Lifestyle Health Questionnaire</h1>
+        <p>
+            This questionnaire focuses on physical nutritional health, dietary
+            patterns, and lifestyle factors for ages 15–24.
+        </p>
+    </div>
+
+    <form method="post" class="questionnaire-form">
+        {% csrf_token %}
+
+        <div class="q-section">
+            <h2>Section 1: Demographic &amp; General Profile</h2>
+
+            <div class="q-field">
+                <label for="{{ form.age.id_for_label }}">1. Age (years)</label>
+                {{ form.age }}
+                {{ form.age.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>2. Gender Identity</label>
+                {{ form.gender_identity }}
+                {{ form.gender_identity.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>3. Current Situation (select all that apply)</label>
+                {{ form.current_situation }}
+                {{ form.current_situation.errors }}
+            </div>
+        </div>
+
+        <div class="q-section">
+            <h2>Section 2: Dietary Habits &amp; Meal Patterns</h2>
+
+            <div class="q-field">
+                <label>4. How many meals do you typically eat per day?</label>
+                {{ form.meals_per_day }}
+                {{ form.meals_per_day.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>5. How many days per week do you eat breakfast?</label>
+                {{ form.breakfast_days_per_week }}
+                {{ form.breakfast_days_per_week.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>6. How often do you eat meals prepared outside the home?</label>
+                {{ form.meals_outside_home_frequency }}
+                {{ form.meals_outside_home_frequency.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>7. Do you currently follow any specific dietary pattern? (select all that apply)</label>
+                {{ form.dietary_pattern }}
+                {{ form.dietary_pattern.errors }}
+                <label for="{{ form.dietary_pattern_other.id_for_label }}" class="q-sublabel">If other, please specify</label>
+                {{ form.dietary_pattern_other }}
+            </div>
+        </div>
+
+        <div class="q-section">
+            <h2>Section 3: Food Group Frequency</h2>
+            <p class="q-section-note">In a typical week, how often do you consume the following foods?</p>
+
+            <div class="q-field">
+                <label>Fruits &amp; Vegetables (fresh, frozen, or cooked)</label>
+                {{ form.freq_fruits_vegetables }}
+                {{ form.freq_fruits_vegetables.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>Whole Grains (oatmeal, brown rice, whole wheat bread)</label>
+                {{ form.freq_whole_grains }}
+                {{ form.freq_whole_grains.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>Lean Proteins (poultry, fish, eggs, tofu, beans/lentils)</label>
+                {{ form.freq_lean_proteins }}
+                {{ form.freq_lean_proteins.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>Dairy or Plant Alternatives (milk, yogurt, cheese)</label>
+                {{ form.freq_dairy_or_alternatives }}
+                {{ form.freq_dairy_or_alternatives.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>Highly Processed Snacks (chips, candies, pastries)</label>
+                {{ form.freq_processed_snacks }}
+                {{ form.freq_processed_snacks.errors }}
+            </div>
+        </div>
+
+        <div class="q-section">
+            <h2>Section 4: Hydration &amp; Beverage Intake</h2>
+
+            <div class="q-field">
+                <label>8. How many cups (approx. 250ml/8oz) of plain water do you drink per day?</label>
+                {{ form.water_cups_per_day }}
+                {{ form.water_cups_per_day.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>9. How often do you drink sugar-sweetened beverages?</label>
+                {{ form.sugar_sweetened_beverage_frequency }}
+                {{ form.sugar_sweetened_beverage_frequency.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>10. How many caffeinated beverages do you consume daily?</label>
+                {{ form.caffeinated_beverages_per_day }}
+                {{ form.caffeinated_beverages_per_day.errors }}
+            </div>
+        </div>
+
+        <div class="q-section">
+            <h2>Section 5: Physical Activity &amp; Lifestyle</h2>
+
+            <div class="q-field">
+                <label>11. How many days a week do you engage in moderate-to-vigorous physical activity for at least 30 minutes?</label>
+                {{ form.physical_activity_days_per_week }}
+                {{ form.physical_activity_days_per_week.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>12. On average, how many hours per day do you spend sitting/lying down looking at screens outside of school/work hours?</label>
+                {{ form.screen_time_hours_per_day }}
+                {{ form.screen_time_hours_per_day.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>13. How many hours of sleep do you average per night on weekdays?</label>
+                {{ form.sleep_hours_weekdays }}
+                {{ form.sleep_hours_weekdays.errors }}
+            </div>
+        </div>
+
+        <div class="q-section">
+            <h2>Section 6: Physical Symptoms &amp; Supplementation</h2>
+
+            <div class="q-field">
+                <label>14. Do you regularly take any dietary supplements? (select all that apply)</label>
+                {{ form.supplements }}
+                {{ form.supplements.errors }}
+                <label for="{{ form.supplements_other.id_for_label }}" class="q-sublabel">If other, please specify</label>
+                {{ form.supplements_other }}
+            </div>
+
+            <div class="q-field">
+                <label>15. Have you frequently experienced any of the following physical symptoms over the past 3 months? (select all that apply)</label>
+                {{ form.physical_symptoms }}
+                {{ form.physical_symptoms.errors }}
+            </div>
+        </div>
+
+        <div class="q-section">
+            <h2>Section 7: Food Security &amp; Accessibility</h2>
+
+            <div class="q-field">
+                <label>16. In the past 12 months, did you ever cut the size of your meals or skip meals because there wasn't enough money for food?</label>
+                {{ form.skipped_meals_due_to_cost }}
+                {{ form.skipped_meals_due_to_cost.errors }}
+            </div>
+
+            <div class="q-field">
+                <label>17. How confident are you in your ability to access or prepare a healthy, balanced meal most days?</label>
+                {{ form.confidence_access_healthy_meal }}
+                {{ form.confidence_access_healthy_meal.errors }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary questionnaire-submit">Submit Questionnaire</button>
+
+    </form>
+
+</section>
+
+{% endblock %}
