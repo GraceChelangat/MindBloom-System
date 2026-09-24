@@ -58,7 +58,7 @@
 </section>
 
 
-<section class="features" id="about">
+<section class="features" id="highlights">
 
     <article class="feature">
         <div class="feature-icon">🌱</div>
@@ -96,6 +96,43 @@
         </div>
     </article>
 
+</section>
+
+<section class="about-home" id="about">
+    <div class="about-home-intro">
+        <p class="eyebrow">ABOUT MINDBLOOM</p>
+        <h2>A safe space to understand your journey.</h2>
+        <p>
+            MindBloom helps young people reflect on mood, eating behaviours
+            and everyday well-being, so small changes become easier to notice.
+        </p>
+
+        <details class="about-details">
+            <summary>Learn more <span>+</span></summary>
+            <div class="about-details-content">
+                <p>
+                    The system brings reflections together to support awareness,
+                    early support and meaningful conversations with healthcare professionals.
+                </p>
+                <div class="about-principles">
+                    <span><strong>Private</strong> handled with care</span>
+                    <span><strong>Supportive</strong> never judgemental</span>
+                    <span><strong>Simple</strong> one check-in at a time</span>
+                </div>
+                <p class="about-note">
+                    MindBloom is a monitoring tool, not a diagnostic service or replacement for professional care.
+                </p>
+            </div>
+        </details>
+    </div>
+
+    <div class="about-home-actions">
+        <p>Your journey matters.<br><em>One check-in at a time.</em> 🌱</p>
+        <div>
+            <a href="{% url 'signup' %}" class="btn btn-primary">Get Started <span>→</span></a>
+            <a href="{% url 'resources' %}" class="about-resource-link">Explore Resources <span>↗</span></a>
+        </div>
+    </div>
 </section>
 
 {% endblock %}

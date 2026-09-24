@@ -27,3 +27,7 @@ def nutrition_questionnaire(request):
         form = NutritionLifestyleQuestionnaireForm()
 
     return render(request, 'nutrition_questionnaire.html', {'form': form})
+
+
+def resources(request):
+    return render(request, 'resources.html')

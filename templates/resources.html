@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block title %}Resources | MindBloom{% endblock %}
+
+{% block content %}
+<section class="resources-page">
+	<header class="resources-hero">
+		<p class="eyebrow">MIND BLOOM LIBRARY</p>
+		<h1>Support, in one <span>simple place.</span></h1>
+		<p>Practical guidance for understanding, supporting and getting help.</p>
+
+		<div class="resource-search">
+			<span aria-hidden="true">⌕</span>
+			<input id="resourceSearch" type="search" placeholder="Search by topic..." aria-label="Search resources">
+		</div>
+
+		<div class="resource-tools" aria-label="Resource filters">
+			<button type="button" class="resource-filter is-active" data-filter="all">All</button>
+			<button type="button" class="resource-filter" data-filter="understanding">Understanding</button>
+			<button type="button" class="resource-filter" data-filter="families">Families</button>
+			<button type="button" class="resource-filter" data-filter="schools">Schools</button>
+			<button type="button" class="resource-filter" data-filter="help">Get help</button>
+			<label class="resource-toggle">
+				<input id="essentialsToggle" type="checkbox">
+				<span>Essentials only</span>
+			</label>
+		</div>
+	</header>
+
+	<nav class="resource-category-grid" aria-label="Resource categories">
+		<a class="resource-category" href="#understanding-an" data-category="understanding">
+			<div class="resource-category-icon">🌱</div>
+			<h3>Understanding AN</h3>
+			<p>Learn the basics</p>
+		</a>
+		<a class="resource-category" href="#families" data-category="families">
+			<div class="resource-category-icon peach-icon">♡</div>
+			<h3>For Families</h3>
+			<p>Supporting someone you love</p>
+		</a>
+		<a class="resource-category" href="#schools" data-category="schools">
+			<div class="resource-category-icon">⌂</div>
+			<h3>For Schools</h3>
+			<p>Supporting students</p>
+		</a>
+		<a class="resource-category" href="#help" data-category="help">
+			<div class="resource-category-icon peach-icon">☎</div>
+			<h3>Get Help</h3>
+			<p>Support when you need it</p>
+		</a>
+	</nav>
+
+	<section class="resource-section" id="understanding-an" data-resource-section="understanding">
+		<div class="resource-section-heading">
+			<span class="resource-number">01</span>
+			<div>
+				<p class="eyebrow">UNDERSTANDING</p>
+				<h2>What is Anorexia Nervosa?</h2>
+			</div>
+		</div>
+		<div class="an-info-grid">
+			<article class="mini-resource-card" data-resource-card data-essential="true">
+				<span class="mini-icon">🌿</span>
+				<h3>What is it?</h3>
+				<p>An eating disorder that can affect mental and physical health.</p>
+			</article>
+			<article class="mini-resource-card" data-resource-card>
+				<span class="mini-icon">♡</span>
+				<h3>Recovery</h3>
+				<p>Recovery is possible with medical, nutritional and psychological support.</p>
+			</article>
+			<article class="mini-resource-card" data-resource-card data-essential="true">
+				<span class="mini-icon">☀</span>
+				<h3>Getting support</h3>
+				<p>You can ask for help before things feel severe.</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="resource-section" id="families" data-resource-section="families">
+		<div class="resource-section-heading">
+			<span class="resource-number">02</span>
+			<div>
+				<p class="eyebrow">FOR FAMILIES</p>
+				<h2>Supporting someone you love</h2>
+			</div>
+		</div>
+		<div class="support-grid">
+			<article class="support-card" data-resource-card data-essential="true"><span>♡</span><h3>Listen</h3><p>Give them space to talk without judgement.</p></article>
+			<article class="support-card" data-resource-card><span>🌿</span><h3>Be patient</h3><p>Recovery may have easier and harder days.</p></article>
+			<article class="support-card" data-resource-card data-essential="true"><span>+</span><h3>Encourage help</h3><p>Support contact with appropriate professionals.</p></article>
+			<article class="support-card" data-resource-card><span>☀</span><h3>Stay connected</h3><p>Show care beyond conversations about food.</p></article>
+		</div>
+	</section>
+
+	<section class="resource-section" id="schools" data-resource-section="schools">
+		<div class="resource-section-heading">
+			<span class="resource-number">03</span>
+			<div>
+				<p class="eyebrow">FOR SCHOOLS</p>
+				<h2>Creating a supportive environment</h2>
+			</div>
+		</div>
+		<div class="school-cards">
+			<article class="school-card" data-resource-card data-essential="true"><span>01</span><h3>Trusted contact</h3><p>Provide a safe staff member students can approach.</p></article>
+			<article class="school-card" data-resource-card><span>02</span><h3>Protect privacy</h3><p>Handle sensitive information respectfully.</p></article>
+			<article class="school-card" data-resource-card data-essential="true"><span>03</span><h3>Offer support</h3><p>Consider reasonable academic accommodations.</p></article>
+			<article class="school-card" data-resource-card><span>04</span><h3>Choose words carefully</h3><p>Avoid unnecessary appearance-focused comments.</p></article>
+		</div>
+	</section>
+
+	<section class="resource-section" id="help" data-resource-section="help">
+		<div class="resource-section-heading">
+			<span class="resource-number">04</span>
+			<div>
+				<p class="eyebrow">GET HELP</p>
+				<h2>Need support right now?</h2>
+			</div>
+		</div>
+		<div class="help-banner">
+			<div class="help-message">
+				<span class="help-heart">♡</span>
+				<h2>You deserve support.</h2>
+				<p>If you are in immediate danger or experiencing a medical emergency, seek urgent help.</p>
+			</div>
+			<div class="emergency-numbers">
+				<a class="emergency-number" href="tel:999"><span>Emergency</span><strong>999</strong><small>Call now →</small></a>
+				<a class="emergency-number" href="tel:112"><span>Emergency</span><strong>112</strong><small>Call now →</small></a>
+				<a class="emergency-number" href="tel:116"><span>Child Helpline</span><strong>116</strong><small>Call now →</small></a>
+			</div>
+		</div>
+		<div class="trusted-support">
+			<span>🌱</span>
+			<div><strong>Not an emergency?</strong><p>Reach out to a medic, counsellor, caregiver or trusted adult.</p></div>
+		</div>
+	</section>
+
+	<p class="resources-disclaimer">Educational support only. It does not replace professional healthcare.</p>
+</section>
+
+<script>
+	(function () {
+		var search = document.getElementById('resourceSearch');
+		var essentials = document.getElementById('essentialsToggle');
+		var sections = document.querySelectorAll('[data-resource-section]');
+		var filters = document.querySelectorAll('.resource-filter');
+		var activeFilter = 'all';
+
+		function updateResources() {
+			var query = search.value.toLowerCase().trim();
+			sections.forEach(function (section) {
+				var categoryMatch = activeFilter === 'all' || section.dataset.resourceSection === activeFilter;
+				var visible = 0;
+				section.querySelectorAll('[data-resource-card]').forEach(function (card) {
+					var matches = (!query || card.textContent.toLowerCase().includes(query)) &&
+						(!essentials.checked || card.dataset.essential === 'true');
+					card.hidden = !categoryMatch || !matches;
+					if (categoryMatch && matches) visible += 1;
+				});
+				section.hidden = !categoryMatch || visible === 0;
+			});
+		}
+
+		search.addEventListener('input', updateResources);
+		essentials.addEventListener('change', updateResources);
+		filters.forEach(function (filter) {
+			filter.addEventListener('click', function () {
+				activeFilter = filter.dataset.filter;
+				filters.forEach(function (item) { item.classList.remove('is-active'); });
+				filter.classList.add('is-active');
+				updateResources();
+			});
+		});
+	}());
+</script>
+{% endblock %}
