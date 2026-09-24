@@ -27,7 +27,7 @@
 
     <div class="dashboard-grid">
 
-        <section class="progress-card">
+        <section class="progress-card" id="progress">
 
     <div class="progress-header">
         <div>
@@ -38,7 +38,7 @@
             </p>
         </div>
 
-        <a href="#" class="card-link">View full progress →</a>
+        <a href="{% url 'dashboard' %}#progress" class="card-link">View full progress →</a>
     </div>
 
     <div class="chart-container">
@@ -171,7 +171,7 @@
                 </div>
             </div>
 
-            <a href="#" class="dashboard-card dashboard-card--compact">
+            <a href="{% url 'nutrition_questionnaire' %}" class="dashboard-card dashboard-card--compact">
                 <div class="dashboard-icon">🌿</div>
                 <div>
                     <span class="card-label">EATING BEHAVIOUR</span>

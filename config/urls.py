@@ -10,4 +10,8 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('nutrition-questionnaire/', views.nutrition_questionnaire, name='nutrition_questionnaire'),
     path('resources/', views.resources, name='resources'),
+    path('privacy/', views.privacy, name='privacy'),
+    path('terms/', views.terms, name='terms'),
+    path('contact/', views.contact, name='contact'),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
 ]

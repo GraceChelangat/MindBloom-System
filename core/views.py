@@ -31,3 +31,19 @@ def nutrition_questionnaire(request):
 
 def resources(request):
     return render(request, 'resources.html')
+
+
+def privacy(request):
+    return render(request, 'privacy.html')
+
+
+def terms(request):
+    return render(request, 'terms.html')
+
+
+def contact(request):
+    return render(request, 'contact.html')
+
+
+def forgot_password(request):
+    return render(request, 'forgot_password.html')
