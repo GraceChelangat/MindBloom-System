@@ -110,6 +110,11 @@ a {
     gap: 12px;
 }
 
+.nav-actions button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
 
 /* ================================
    Buttons
