@@ -1,56 +1,71 @@
 {% extends 'base.html' %}
-{% load static %}
 
-{% block title %}MindBloom | Minds Grow Here{% endblock %}
+{% block title %}MindBloom | Understand. Track. Grow.{% endblock %}
 
 {% block content %}
 
-<section class="hero">
+<!-- =====================================================
+     HERO SECTION
+===================================================== -->
+<section class="hero-section">
 
     <div class="hero-content">
 
-        <p class="eyebrow">A SAFER, BRIGHTER YOU</p>
+        <p class="eyebrow">UNDERSTAND • TRACK • GROW</p>
 
         <h1>
-            A brighter<br>
-            tomorrow is <span>possible.</span>
+            Minds grow <span>here.</span>
         </h1>
 
         <p class="hero-description">
-            Track your mood, understand your behaviours,
-            and get the support you need.
+            MindBloom is a gentle space for teenagers and young adults
+            to check in, understand their wellbeing patterns and stay
+            connected to appropriate support.
         </p>
 
-        <a href="{% url 'signup' %}" class="btn btn-primary hero-button">
-            Get Started <span>→</span>
-        </a>
+        <div class="hero-buttons">
 
-        <p class="small-message">
-            SMALL STEPS. BIGGER TOMORROWS.
-        </p>
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'dashboard' %}"
+                   class="btn btn-primary">
+                    Go to Dashboard
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'signup' %}"
+                   class="btn btn-primary">
+                    Get Started
+                </a>
+
+                <a href="#how-it-works"
+                   class="btn btn-secondary">
+                    Learn More
+                </a>
+
+            {% endif %}
+
+        </div>
 
     </div>
+
 
     <div class="hero-visual">
 
-        <div class="visual-circle">
-            <div class="plant">🌿</div>
+        <div class="hero-plant">
+            🌿
+        </div>
 
-            <div class="affirmation affirmation-one">
-                A calmer mind.<br>
-                A kinder you.<br>
-                A brighter tomorrow. ♡
-            </div>
+        <div class="hero-visual-card">
 
-            <div class="affirmation affirmation-two">
-                You matter here. ♡
-            </div>
+            <span>♡</span>
 
-            <div class="affirmation affirmation-three">
-                Progress over perfection. ♡
-            </div>
+            <p>
+                Small steps.<br>
+                Brighter tomorrows.
+            </p>
 
-            <div class="hero-symbol">🌱</div>
         </div>
 
     </div>
@@ -58,83 +73,290 @@
 </section>
 
 
-<section class="features" id="highlights">
+<!-- =====================================================
+     WHAT MINDBLOOM DOES
+===================================================== -->
+<section class="home-features" id="how-it-works">
 
-    <article class="feature">
-        <div class="feature-icon">🌱</div>
+    <div class="section-heading">
 
-        <div>
-            <h2>Track</h2>
-            <p>
-                Log your mood and eating behaviours
-                in a simple, supportive space.
-            </p>
-        </div>
-    </article>
+        <p class="eyebrow">HOW MINDBLOOM HELPS</p>
 
-    <article class="feature">
-        <div class="feature-icon peach">▥</div>
+        <h2>
+            Understand your wellbeing,
+            <span>one day at a time.</span>
+        </h2>
 
-        <div>
-            <h2>Understand</h2>
-            <p>
-                See patterns and insights over time
-                through your personal progress.
-            </p>
-        </div>
-    </article>
-
-    <article class="feature" id="resources">
-        <div class="feature-icon">♡</div>
-
-        <div>
-            <h2>Get Support</h2>
-            <p>
-                Access helpful educational resources
-                and receive support when needed.
-            </p>
-        </div>
-    </article>
-
-</section>
-
-<section class="about-home" id="about">
-    <div class="about-home-intro">
-        <p class="eyebrow">ABOUT MINDBLOOM</p>
-        <h2>A safe space to understand your journey.</h2>
         <p>
-            MindBloom is designed for teenagers and young adults living with
-            anorexia nervosa. It helps you reflect on mood, eating behaviours
-            and everyday well-being, so small changes become easier to notice.
+            Simple tools help you reflect on your wellbeing
+            and recognise changes over time.
         </p>
 
-        <details class="about-details">
-            <summary>Learn more <span>+</span></summary>
-            <div class="about-details-content">
-                <p>
-                    The system brings reflections related to anorexia nervosa
-                    together to support awareness, early support and meaningful
-                    conversations with healthcare professionals.
-                </p>
-                <div class="about-principles">
-                    <span><strong>Private</strong> handled with care</span>
-                    <span><strong>Supportive</strong> never judgemental</span>
-                    <span><strong>Simple</strong> one check-in at a time</span>
-                </div>
-                <p class="about-note">
-                    MindBloom is a monitoring tool, not a diagnostic service or replacement for professional care.
-                </p>
-            </div>
-        </details>
     </div>
 
-    <div class="about-home-actions">
-        <p>Your journey matters.<br><em>One check-in at a time.</em> 🌱</p>
-        <div>
-            <a href="{% url 'signup' %}" class="btn btn-primary">Get Started <span>→</span></a>
-            <a href="{% url 'resources' %}" class="about-resource-link">Explore Resources <span>↗</span></a>
-        </div>
+
+    <div class="feature-grid">
+
+        <!-- Check In -->
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                ✓
+            </div>
+
+            <h3>Daily Check-In</h3>
+
+            <p>
+                Take a few moments to reflect on your daily
+                wellbeing and lifestyle patterns.
+            </p>
+
+        </article>
+
+
+        <!-- Mood -->
+        <article class="feature-card">
+
+            <div class="feature-icon peach-feature">
+                ♡
+            </div>
+
+            <h3>Track Your Mood</h3>
+
+            <p>
+                Record how you are feeling and notice emotional
+                patterns over time.
+            </p>
+
+        </article>
+
+
+        <!-- Eating behaviour -->
+        <article class="feature-card">
+
+            <div class="feature-icon">
+                🌱
+            </div>
+
+            <h3>Eating Behaviours</h3>
+
+            <p>
+                Keep simple records of eating-related behaviours
+                to better understand patterns.
+            </p>
+
+        </article>
+
+
+        <!-- Progress -->
+        <article class="feature-card">
+
+            <div class="feature-icon peach-feature">
+                ↗
+            </div>
+
+            <h3>Understand Progress</h3>
+
+            <p>
+                View your recorded information and observe how
+                your patterns change over time.
+            </p>
+
+        </article>
+
     </div>
+
+</section>
+
+
+<!-- =====================================================
+     SUPPORT SECTION
+===================================================== -->
+<section class="home-support-section">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">
+            SUPPORT MATTERS
+        </p>
+
+        <h2>
+            Support makes a
+            <span>difference.</span>
+        </h2>
+
+        <p>
+            Friends, families and schools can help create an
+            environment where young people feel heard,
+            respected and supported.
+        </p>
+
+    </div>
+
+
+    <div class="home-support-grid">
+
+        <!-- FAMILY AND FRIENDS -->
+        <article class="home-support-card family-support-card">
+
+            <div class="home-support-icon">
+                ♡
+            </div>
+
+            <p class="support-card-label">
+                FRIENDS & FAMILY
+            </p>
+
+            <h3>
+                Be there beyond the difficult days.
+            </h3>
+
+            <p>
+                Listen without judgement, remain patient,
+                encourage appropriate professional support
+                and continue showing care.
+            </p>
+
+
+            <div class="support-points">
+
+                <span>✓ Listen</span>
+
+                <span>✓ Be patient</span>
+
+                <span>✓ Stay connected</span>
+
+            </div>
+
+
+            <a href="{% url 'resources' %}#families"
+               class="support-link">
+
+                Learn how to support →
+
+            </a>
+
+        </article>
+
+
+        <!-- SCHOOL -->
+        <article class="home-support-card school-support-card">
+
+            <div class="home-support-icon peach-support-icon">
+                ⌂
+            </div>
+
+            <p class="support-card-label">
+                SCHOOLS
+            </p>
+
+            <h3>
+                Create a safe place to learn and grow.
+            </h3>
+
+            <p>
+                Schools can support students by protecting
+                privacy, providing trusted contacts and
+                considering appropriate accommodations.
+            </p>
+
+
+            <div class="support-points">
+
+                <span>✓ Protect privacy</span>
+
+                <span>✓ Offer support</span>
+
+                <span>✓ Provide a trusted contact</span>
+
+            </div>
+
+
+            <a href="{% url 'resources' %}#schools"
+               class="support-link">
+
+                Explore school support →
+
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RESOURCES CTA
+===================================================== -->
+<section class="home-resources-cta">
+
+    <div class="home-resources-content">
+
+        <p class="eyebrow">
+            LEARN • SUPPORT • CONNECT
+        </p>
+
+        <h2>
+            Looking for more
+            <span>guidance?</span>
+        </h2>
+
+        <p>
+            Explore helpful information about anorexia nervosa,
+            recovery, family and school support, and where to
+            seek help when you need it.
+        </p>
+
+        <a href="{% url 'resources' %}"
+           class="btn btn-primary">
+
+            Explore Resources
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL CTA
+===================================================== -->
+<section class="home-final-cta">
+
+    <span class="cta-leaf">
+        🌱
+    </span>
+
+    <h2>
+        Your journey matters.
+    </h2>
+
+    <p>
+        One check-in at a time.
+    </p>
+
+    {% if user.is_authenticated %}
+
+        <a href="{% url 'dashboard' %}"
+           class="btn btn-primary">
+
+            Continue to Dashboard
+
+        </a>
+
+    {% else %}
+
+        <a href="{% url 'signup' %}"
+           class="btn btn-primary">
+
+            Begin Your Journey
+
+        </a>
+
+    {% endif %}
+
 </section>
 
 {% endblock %}

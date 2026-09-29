@@ -4,247 +4,425 @@
 
 {% block content %}
 
-<section class="dashboard">
+<div class="dashboard-page">
 
-    <div class="dashboard-welcome">
+    <!-- =====================================================
+         DASHBOARD HEADER
+    ===================================================== -->
+    <section class="dashboard-welcome">
+
         <div>
-            <p class="eyebrow">YOUR MINDBLOOM SPACE</p>
-            <h1>Good to see you 🌱</h1>
-            <p>
-                Take a moment to check in with yourself.
-                Small reflections can help you understand your patterns over time.
+
+            <p class="eyebrow">
+                YOUR SPACE
             </p>
+
+            <h1>
+                Welcome back,
+                <span>{{ user.username }}.</span>
+            </h1>
+
+            <p>
+                How are you feeling today?
+                Take a moment to check in with yourself.
+            </p>
+
         </div>
+
 
         <div class="dashboard-date">
+
             <span>Today</span>
-            <strong>{% now "D, d M Y" %}</strong>
-        </div>
-    </div>
 
+            <strong>
+                {% now "D, d M Y" %}
+            </strong>
 
-    <p class="section-label">TODAY'S ACTIONS &amp; PROGRESS</p>
-
-    <div class="dashboard-grid">
-
-        <section class="progress-card" id="progress">
-
-    <div class="progress-header">
-        <div>
-            <span class="card-label">YOUR PROGRESS</span>
-            <h2>Progress over time</h2>
-            <p>
-                A simple view of your recent check-in patterns.
-            </p>
         </div>
 
-        <a href="{% url 'dashboard' %}#progress" class="card-link">View full progress →</a>
-    </div>
+    </section>
 
-    <div class="chart-container">
 
-        <div class="chart-y-labels">
-            <span>5</span>
-            <span>4</span>
-            <span>3</span>
-            <span>2</span>
-            <span>1</span>
-        </div>
+    <!-- =====================================================
+         QUICK ACTIONS
+    ===================================================== -->
+    <section class="dashboard-actions">
 
-        <div class="chart-area">
+        <!-- DAILY CHECK-IN -->
+        <article class="dashboard-action-card">
 
-            <div class="chart-grid-line line-1"></div>
-            <div class="chart-grid-line line-2"></div>
-            <div class="chart-grid-line line-3"></div>
-            <div class="chart-grid-line line-4"></div>
-            <div class="chart-grid-line line-5"></div>
-
-            <svg
-                class="progress-chart"
-                viewBox="0 0 600 200"
-                preserveAspectRatio="none"
-            >
-                <polyline
-                    class="chart-line chart-line-mood"
-                    points="0,150 100,125 200,140 300,90 400,105 500,65 600,45"
-                    fill="none"
-                    stroke-width="4"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-                <polyline
-                    class="chart-line chart-line-sleep"
-                    points="0,170 100,160 200,110 300,130 400,80 500,100 600,70"
-                    fill="none"
-                    stroke-width="4"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-                <polyline
-                    class="chart-line chart-line-stress"
-                    points="0,100 100,115 200,95 300,140 400,120 500,150 600,130"
-                    fill="none"
-                    stroke-width="4"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-
-                <circle class="chart-dot chart-line-mood" cx="0" cy="150" r="6"/>
-                <circle class="chart-dot chart-line-mood" cx="100" cy="125" r="6"/>
-                <circle class="chart-dot chart-line-mood" cx="200" cy="140" r="6"/>
-                <circle class="chart-dot chart-line-mood" cx="300" cy="90" r="6"/>
-                <circle class="chart-dot chart-line-mood" cx="400" cy="105" r="6"/>
-                <circle class="chart-dot chart-line-mood" cx="500" cy="65" r="6"/>
-                <circle class="chart-dot chart-line-mood" cx="600" cy="45" r="6"/>
-
-                <circle class="chart-dot chart-line-sleep" cx="0" cy="170" r="6"/>
-                <circle class="chart-dot chart-line-sleep" cx="100" cy="160" r="6"/>
-                <circle class="chart-dot chart-line-sleep" cx="200" cy="110" r="6"/>
-                <circle class="chart-dot chart-line-sleep" cx="300" cy="130" r="6"/>
-                <circle class="chart-dot chart-line-sleep" cx="400" cy="80" r="6"/>
-                <circle class="chart-dot chart-line-sleep" cx="500" cy="100" r="6"/>
-                <circle class="chart-dot chart-line-sleep" cx="600" cy="70" r="6"/>
-
-                <circle class="chart-dot chart-line-stress" cx="0" cy="100" r="6"/>
-                <circle class="chart-dot chart-line-stress" cx="100" cy="115" r="6"/>
-                <circle class="chart-dot chart-line-stress" cx="200" cy="95" r="6"/>
-                <circle class="chart-dot chart-line-stress" cx="300" cy="140" r="6"/>
-                <circle class="chart-dot chart-line-stress" cx="400" cy="120" r="6"/>
-                <circle class="chart-dot chart-line-stress" cx="500" cy="150" r="6"/>
-                <circle class="chart-dot chart-line-stress" cx="600" cy="130" r="6"/>
-            </svg>
-
-            <div class="chart-days">
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-                <span>Sun</span>
+            <div class="dashboard-action-icon">
+                ✓
             </div>
 
-        </div>
-
-    </div>
-
-    <div class="chart-legend">
-        <span class="chart-legend-item"><i class="chart-legend-dot chart-line-mood"></i>Mood</span>
-        <span class="chart-legend-item"><i class="chart-legend-dot chart-line-sleep"></i>Sleep</span>
-        <span class="chart-legend-item"><i class="chart-legend-dot chart-line-stress"></i>Stress</span>
-    </div>
-
-    <p class="chart-note">
-        Sample display only — your recorded information will appear here.
-    </p>
-
-</section>
-        <div class="dashboard-side">
-
-            <a href="{% url 'nutrition_questionnaire' %}" class="dashboard-card dashboard-card--compact">
-                <div class="dashboard-icon">✓</div>
-                <div>
-                    <span class="card-label">DAILY CHECK-IN</span>
-                    <h2>How are you today?</h2>
-                    <p>
-                        Complete a short check-in about how your day is going.
-                    </p>
-                    <span class="card-link">Start check-in →</span>
-                </div>
-            </a>
-
-            <div class="dashboard-card dashboard-card--compact mood-card">
-                <div class="dashboard-icon peach-icon">♡</div>
-                <div>
-                    <span class="card-label">MOOD</span>
-                    <h2>Track your mood</h2>
-                    <p>
-                        Tap the emoji that best matches how you're feeling right now.
-                    </p>
-                    <div class="mood-emoji-row" role="group" aria-label="Select your mood">
-                        <button type="button" class="mood-emoji" data-mood="great" aria-label="Great">😄</button>
-                        <button type="button" class="mood-emoji" data-mood="good" aria-label="Good">🙂</button>
-                        <button type="button" class="mood-emoji" data-mood="okay" aria-label="Okay">😐</button>
-                        <button type="button" class="mood-emoji" data-mood="low" aria-label="Low">😕</button>
-                        <button type="button" class="mood-emoji" data-mood="rough" aria-label="Rough">😢</button>
-                    </div>
-                </div>
-            </div>
-
-            <a href="{% url 'nutrition_questionnaire' %}" class="dashboard-card dashboard-card--compact">
-                <div class="dashboard-icon">🌿</div>
-                <div>
-                    <span class="card-label">EATING BEHAVIOUR</span>
-                    <h2>Record your day</h2>
-                    <p>
-                        Keep a simple record of eating behaviours and related notes.
-                    </p>
-                    <span class="card-link">Add record →</span>
-                </div>
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <p class="section-label">YOUR WELLBEING SNAPSHOT</p>
-
-    <div class="dashboard-bottom">
-
-        <div class="risk-card">
-            <div class="dashboard-icon">🛡</div>
             <div>
-                <span class="card-label">RISK STATUS</span>
-                <h2>Your current status</h2>
+
+                <p class="card-label">
+                    DAILY WELLBEING
+                </p>
+
+                <h3>
+                    Daily Check-In
+                </h3>
 
                 <p>
-                    Your status will appear here after enough
-                    check-in and behavioural information has been recorded.
+                    Take a moment to reflect on today's
+                    wellbeing and lifestyle patterns.
                 </p>
+
+                <a href="#" class="card-link">
+                    Start check-in →
+                </a>
+
             </div>
+
+        </article>
+
+
+        <!-- MOOD -->
+        <article class="dashboard-action-card">
+
+            <div class="dashboard-action-icon peach-dashboard-icon">
+                ♡
+            </div>
+
+            <div>
+
+                <p class="card-label">
+                    HOW YOU FEEL
+                </p>
+
+                <h3>
+                    Mood
+                </h3>
+
+                <p>
+                    Record how you're feeling today and
+                    build a picture of your emotional patterns.
+                </p>
+
+                <a href="#" class="card-link">
+                    Record mood →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- EATING BEHAVIOUR -->
+        <article class="dashboard-action-card">
+
+            <div class="dashboard-action-icon">
+                🌱
+            </div>
+
+            <div>
+
+                <p class="card-label">
+                    DAILY PATTERNS
+                </p>
+
+                <h3>
+                    Eating Behaviour
+                </h3>
+
+                <p>
+                    Record your eating-related behaviours
+                    in a simple and supportive way.
+                </p>
+
+                <a href="#" class="card-link">
+                    Add record →
+                </a>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROGRESS
+    ===================================================== -->
+    <section class="progress-card">
+
+        <div class="progress-header">
+
+            <div>
+
+                <span class="card-label">
+                    YOUR PROGRESS
+                </span>
+
+                <h2>
+                    Progress over time
+                </h2>
+
+                <p>
+                    A view of your recent patterns across mood,
+                    eating behaviour and daily wellbeing.
+                </p>
+
+            </div>
+
+
+            <a href="#"
+               class="card-link">
+
+                View full progress →
+
+            </a>
+
+
+        </div>
+
+
+        <div class="multi-chart">
+
+            <div class="chart-y-title">
+                Rating
+                <br>
+                <small>(1–5)</small>
+            </div>
+
+
+            <div class="chart-wrapper">
+
+                <div class="chart-y-labels">
+                    <span>5</span>
+                    <span>4</span>
+                    <span>3</span>
+                    <span>2</span>
+                    <span>1</span>
+                </div>
+
+
+                <div class="chart-plot">
+
+                    <div class="chart-grid-line line-1"></div>
+                    <div class="chart-grid-line line-2"></div>
+                    <div class="chart-grid-line line-3"></div>
+                    <div class="chart-grid-line line-4"></div>
+                    <div class="chart-grid-line line-5"></div>
+
+
+                    <svg
+                        class="progress-chart"
+                        viewBox="0 0 600 200"
+                        preserveAspectRatio="none"
+                    >
+
+                        <!-- Mood -->
+                        <polyline
+                            class="mood-line"
+                            points="
+                            0,100
+                            100,50
+                            200,75
+                            300,50
+                            400,25
+                            500,45
+                            600,15"
+                        />
+
+
+                        <!-- Eating behaviour -->
+                        <polyline
+                            class="eating-line"
+                            points="
+                            0,150
+                            100,125
+                            200,100
+                            300,125
+                            400,100
+                            500,75
+                            600,100"
+                        />
+
+
+                        <!-- Daily check-in -->
+                        <polyline
+                            class="checkin-line"
+                            points="
+                            0,175
+                            100,150
+                            200,150
+                            300,125
+                            400,95
+                            500,110
+                            600,75"
+                        />
+
+                    </svg>
+
+
+                    <div class="chart-days">
+
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                        <span>Sun</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LEGEND -->
+        <div class="chart-legend">
+
+            <span>
+                <i class="legend-dot mood-dot"></i>
+                Mood
+            </span>
+
+            <span>
+                <i class="legend-dot eating-dot"></i>
+                Eating Behaviour
+            </span>
+
+            <span>
+                <i class="legend-dot checkin-dot"></i>
+                Daily Check-In
+            </span>
+
+        </div>
+
+
+        <p class="chart-note">
+            Sample display only — your recorded information
+            will appear here.
+        </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         RISK + RESOURCES
+    ===================================================== -->
+    <section class="dashboard-bottom-grid">
+
+
+        <!-- RISK -->
+        <article class="risk-card">
+
+            <div class="risk-icon">
+                ♡
+            </div>
+
+            <p class="card-label">
+                RELAPSE RISK
+            </p>
+
+            <h2>
+                Risk Status
+            </h2>
 
             <div class="risk-status">
-                <span>Not yet assessed</span>
+
+                <span class="risk-indicator"></span>
+
+                <strong>
+                    Not yet assessed
+                </strong>
+
             </div>
-        </div>
+
+            <p>
+                Complete your check-ins and records to help
+                MindBloom identify patterns over time.
+            </p>
+
+            <small>
+                MindBloom provides risk monitoring support
+                and does not provide a medical diagnosis.
+            </small>
+
+        </article>
 
 
-        <div class="resource-card">
-            <div class="dashboard-icon peach-icon">✦</div>
-            <div>
-                <span class="card-label">RESOURCES</span>
-                <h2>A little support for today</h2>
+        <!-- RESOURCES -->
+        <article class="dashboard-resources-card">
 
-                <p>
-                    Explore educational and supportive resources
-                    available in MindBloom.
-                </p>
+            <div class="resources-card-icon">
+                🌿
+            </div>
 
-                <a href="{% url 'resources' %}" class="card-link">
-                    Explore resources →
+            <p class="card-label">
+                SUPPORT & LEARNING
+            </p>
+
+            <h2>
+                Resources
+            </h2>
+
+            <p>
+                Find helpful information about anorexia nervosa,
+                recovery, family and school support, and where
+                to seek help.
+            </p>
+
+
+            <div class="dashboard-resource-links">
+
+                <a href="{% url 'resources' %}#understanding-an">
+                    Understanding AN
+                    <span>→</span>
                 </a>
-                <a href="{% url 'logout' %}" class="logout-btn">
-    Log out
-</a>
+
+                <a href="{% url 'resources' %}#families">
+                    Family Support
+                    <span>→</span>
+                </a>
+
+                <a href="{% url 'resources' %}#schools">
+                    School Support
+                    <span>→</span>
+                </a>
+
+                <a href="{% url 'resources' %}#help">
+                    Get Help
+                    <span>→</span>
+                </a>
+
             </div>
-        </div>
+
+
+            <a href="{% url 'resources' %}"
+               class="btn btn-secondary dashboard-resource-button">
+
+                Explore all resources
+
+            </a>
+
+        </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         LOGOUT
+    ===================================================== -->
+    <div class="dashboard-logout">
+
+        <a href="{% url 'logout' %}"
+           class="logout-btn">
+
+            Log out
+
+        </a>
 
     </div>
 
-</section>
-
-<script>
-    document.querySelectorAll('.mood-emoji-row').forEach(function (row) {
-        row.addEventListener('click', function (event) {
-            var button = event.target.closest('.mood-emoji');
-            if (!button) return;
-            row.querySelectorAll('.mood-emoji').forEach(function (el) {
-                el.classList.remove('is-selected');
-            });
-            button.classList.add('is-selected');
-        });
-    });
-</script>
+</div>
 
 {% endblock %}

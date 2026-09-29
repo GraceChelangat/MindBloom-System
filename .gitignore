@@ -1,2 +1,34 @@
+# Python cache
 __pycache__/
 *.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# MindBloom ML data and trained models
+core/ml/data/*
+core/ml/models/*
+
+# Keep ML folders in Git
+!core/ml/data/.gitkeep
+!core/ml/models/.gitkeep
+
+# ML model artifacts
+*.joblib
+*.pkl
+*.h5
+*.ckpt
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
