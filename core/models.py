@@ -188,3 +188,64 @@ class NutritionLifestyleQuestionnaire(models.Model):
     def __str__(self):
         who = self.user.username if self.user else 'Anonymous'
         return f'Nutrition & Lifestyle Questionnaire — {who} ({self.submitted_at:%Y-%m-%d})'
+
+
+class DailyCheckIn(models.Model):
+
+    MOOD_CHOICES = [
+        (1, "Very Low"),
+        (2, "Low"),
+        (3, "Neutral"),
+        (4, "Good"),
+        (5, "Very Good"),
+    ]
+
+    STRESS_CHOICES = [
+        (1, "Very Low"),
+        (2, "Low"),
+        (3, "Moderate"),
+        (4, "High"),
+        (5, "Very High"),
+    ]
+
+    user = models.ForeignKey(
+        "auth.User",
+        on_delete=models.CASCADE,
+        related_name="daily_checkins"
+    )
+
+    mood_level = models.PositiveSmallIntegerField(
+        choices=MOOD_CHOICES
+    )
+
+    stress_level = models.PositiveSmallIntegerField(
+        choices=STRESS_CHOICES
+    )
+
+    sleep_hours = models.FloatField(
+        null=True,
+        blank=True
+    )
+
+    meals_per_day = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True
+    )
+
+    eating_difficulties = models.BooleanField(
+        default=False
+    )
+
+    notes = models.TextField(
+        blank=True
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.user.username} - {self.created_at.date()}"    
