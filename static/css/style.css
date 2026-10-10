@@ -2697,3 +2697,55 @@ p:last-of-type {
     background: #fff0e6;
     color: #a86b4d;
 }
+
+/* Dashboard mood card */
+.mood-status-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 14px;
+}
+.mood-status-group p {
+    margin: 0;
+}
+.mood-description {
+    color: #718078;
+    font-size: 15px;
+    line-height: 1.6;
+}
+.mood-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: #f8e7df;
+    border-radius: 18px;
+}
+.mood-rating-icon {
+    color: #c77e63;
+    font-size: 24px;
+}
+.mood-rating-number {
+    color: #294d3d;
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+}
+.mood-updated {
+    color: #718078;
+    font-size: 12px;
+}
+.mood-empty {
+    padding: 10px 15px;
+    background: #fff0e6;
+    border-radius: 30px;
+    color: #a86b4d;
+    font-size: 13px;
+    font-weight: 600;
+}
+.mood-status-group .card-link {
+    display: inline-flex;
+    width: fit-content;
+    margin-top: 6px;
+}

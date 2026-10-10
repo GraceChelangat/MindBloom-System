@@ -118,9 +118,40 @@
                     build a picture of your emotional patterns.
                 </p>
 
-                <a href="{% url 'daily_checkin' %}" class="card-link">
-                    Record mood →
-                </a>
+            
+{% if latest_checkin %}
+    <div class="mood-status-group">
+        <p class="mood-description">
+            Your most recently recorded mood:
+        </p>
+        <div class="mood-rating">
+            <span class="mood-rating-icon">♡</span>
+            <span class="mood-rating-number">
+                {{ latest_checkin.mood_level }}/5
+            </span>
+        </div>
+        <p class="mood-updated">
+            Recorded on {{ latest_checkin.created_at|date:"d M Y" }}
+        </p>
+        <a href="{% url 'daily_checkin' %}" class="card-link">
+            Record a new mood →
+        </a>
+    </div>
+{% else %}
+    <div class="mood-status-group">
+        <p class="mood-description">
+            Record how you're feeling today and
+            build a picture of your emotional patterns.
+        </p>
+        <p class="mood-empty">
+            No mood recorded yet 🌱
+        </p>
+        <a href="{% url 'daily_checkin' %}" class="card-link">
+            Record your first mood →
+        </a>
+    </div>
+{% endif %}
+
 
             </div>
 
