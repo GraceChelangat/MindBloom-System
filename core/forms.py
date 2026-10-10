@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import DailyCheckIn
 from .models import NutritionLifestyleQuestionnaire as Q
 
 
@@ -121,3 +121,70 @@ class NutritionLifestyleQuestionnaireForm(forms.Form):
             skipped_meals_due_to_cost=data['skipped_meals_due_to_cost'],
             confidence_access_healthy_meal=data['confidence_access_healthy_meal'],
         )
+
+
+
+
+class DailyCheckInForm(forms.ModelForm):
+
+    class Meta:
+        model = DailyCheckIn
+
+        fields = [
+            "mood_level",
+            "stress_level",
+            "sleep_hours",
+            "meals_per_day",
+            "eating_difficulties",
+            "notes",
+        ]
+
+        widgets = {
+            "mood_level": forms.Select(
+                attrs={"class": "form-select"}
+            ),
+
+            "stress_level": forms.Select(
+                attrs={"class": "form-select"}
+            ),
+
+            "sleep_hours": forms.NumberInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Hours slept",
+                    "min": "0",
+                    "max": "24",
+                    "step": "0.5",
+                }
+            ),
+
+            "meals_per_day": forms.NumberInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Optional",
+                    "min": "0",
+                }
+            ),
+
+            "eating_difficulties": forms.CheckboxInput(
+                attrs={"class": "form-check-input"}
+            ),
+
+            "notes": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "rows": 4,
+                    "placeholder": "How has your day been?",
+                }
+            ),
+        }
+
+    def clean_sleep_hours(self):
+        value = self.cleaned_data.get("sleep_hours")
+
+        if value is not None and not 0 <= value <= 24:
+            raise forms.ValidationError(
+                "Sleep hours must be between 0 and 24."
+            )
+
+        return value
