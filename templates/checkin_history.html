@@ -1,0 +1,338 @@
+
+{% extends 'base.html' %}
+{% block title %}Check-In History | MindBloom{% endblock %}
+
+{% block content %}
+<style>
+.history-page {
+    max-width: 1150px;
+    margin: 45px auto 80px;
+    padding: 0 24px;
+}
+.history-hero {
+    background: linear-gradient(135deg, #e6efe2, #f8f3e9);
+    border: 1px solid #e0e8d9;
+    border-radius: 28px;
+    padding: 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+.history-eyebrow {
+    color: #527b5e;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+}
+.history-hero h1 {
+    color: #294d3d;
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 45px);
+    margin: 0 0 12px;
+}
+.history-hero p {
+    color: #63796a;
+    line-height: 1.7;
+    margin: 0;
+}
+.history-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 20px;
+    border: 1px solid #72967c;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #294d3d;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.history-back:hover {
+    background: #e8f0e4;
+}
+.history-overview {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 24px 28px;
+    background: #ffffff;
+    border: 1px solid #e8e1d7;
+    border-radius: 22px;
+    margin-bottom: 28px;
+}
+.history-overview-icon {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 17px;
+    background: #e4efe1;
+    font-size: 27px;
+}
+.history-overview span {
+    display: block;
+    color: #718078;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.history-overview strong {
+    display: block;
+    color: #294d3d;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    margin-top: 4px;
+}
+.history-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+.history-entry {
+    background: #ffffff;
+    border: 1px solid #e8e1d7;
+    border-radius: 23px;
+    padding: 26px;
+    box-shadow: 0 8px 24px rgba(41, 77, 61, 0.04);
+}
+.history-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+.history-entry-header h3 {
+    color: #294d3d;
+    font-family: Georgia, serif;
+    font-size: 21px;
+    margin: 0 0 6px;
+}
+.history-entry-header time {
+    color: #718078;
+    font-size: 12px;
+}
+.history-recorded {
+    padding: 8px 12px;
+    border-radius: 25px;
+    background: #e4efe1;
+    color: #416b57;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.history-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.history-metric {
+    padding: 17px 8px;
+    border-radius: 15px;
+    text-align: center;
+    background: #f7f6f0;
+}
+.history-metric:nth-child(1) {
+    background: #f8e7df;
+}
+.history-metric:nth-child(2) {
+    background: #e4efe1;
+}
+.history-metric:nth-child(3) {
+    background: #f8eddc;
+}
+.history-metric span {
+    display: block;
+    color: #718078;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+.history-metric strong {
+    color: #294d3d;
+    font-size: 18px;
+}
+.history-detail {
+    color: #63796a;
+    font-size: 13px;
+    line-height: 1.7;
+    padding-top: 14px;
+    margin: 0;
+    border-top: 1px solid #ece8e0;
+}
+.history-detail + .history-detail {
+    margin-top: 10px;
+}
+.history-detail strong {
+    color: #294d3d;
+}
+.history-notes {
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+.history-empty {
+    background: #ffffff;
+    border: 1px solid #e8e1d7;
+    border-radius: 24px;
+    text-align: center;
+    padding: 65px 24px;
+}
+.history-empty-icon {
+    font-size: 45px;
+    margin-bottom: 16px;
+}
+.history-empty h2 {
+    color: #294d3d;
+    font-family: Georgia, serif;
+    margin: 0 0 12px;
+}
+.history-empty p {
+    color: #718078;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+.history-start {
+    display: inline-block;
+    padding: 13px 23px;
+    border-radius: 30px;
+    background: #416b57;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+}
+.history-start:hover {
+    background: #294d3d;
+}
+@media (max-width: 800px) {
+    .history-list {
+        grid-template-columns: 1fr;
+    }
+    .history-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px;
+    }
+}
+@media (max-width: 480px) {
+    .history-page {
+        padding: 0 14px;
+        margin-top: 24px;
+    }
+    .history-entry {
+        padding: 18px;
+    }
+    .history-metric {
+        padding: 13px 5px;
+    }
+    .history-metric strong {
+        font-size: 15px;
+    }
+    .history-recorded {
+        font-size: 11px;
+    }
+}
+</style>
+
+<div class="history-page">
+    <section class="history-hero">
+        <div>
+            <p class="history-eyebrow">MY WELLBEING JOURNEY</p>
+            <h1>Check-In History 🌿</h1>
+            <p>
+                A gentle look back at your daily reflections.
+                Every entry is part of your personal journey.
+            </p>
+        </div>
+        <a href="{% url 'dashboard' %}" class="history-back">
+            ← Back to Dashboard
+        </a>
+    </section>
+
+    <section class="history-overview">
+        <div class="history-overview-icon">📅</div>
+        <div>
+            <span>TOTAL CHECK-INS</span>
+            <strong>{{ total_checkins }}</strong>
+        </div>
+    </section>
+
+    {% if checkins %}
+        <section class="history-list" aria-label="Your previous check-ins">
+            {% for checkin in checkins %}
+                <article class="history-entry">
+                    <div class="history-entry-header">
+                        <div>
+                            <h3>{{ checkin.created_at|date:"d M Y" }}</h3>
+                            <time datetime="{{ checkin.created_at|date:'c' }}">
+                                {{ checkin.created_at|date:"g:i A" }}
+                            </time>
+                        </div>
+                        <span class="history-recorded">✓ Recorded</span>
+                    </div>
+
+                    <div class="history-metrics">
+                        <div class="history-metric">
+                            <span>♡ Mood</span>
+                            <strong>{{ checkin.mood_level }}/5</strong>
+                        </div>
+                        <div class="history-metric">
+                            <span>◷ Stress</span>
+                            <strong>{{ checkin.stress_level }}/5</strong>
+                        </div>
+                        <div class="history-metric">
+                            <span>☾ Sleep</span>
+                            <strong>
+                                {% if checkin.sleep_hours != None %}
+                                    {{ checkin.sleep_hours }} hrs
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </strong>
+                        </div>
+                    </div>
+
+                    <p class="history-detail">
+                        <strong>Eating reflection:</strong>
+                        {% if checkin.eating_difficulties %}
+                            Eating difficulties reported
+                        {% else %}
+                            No eating difficulties reported
+                        {% endif %}
+                    </p>
+
+                    {% if checkin.meals_per_day != None %}
+                        <p class="history-detail">
+                            <strong>Meals recorded:</strong>
+                            {{ checkin.meals_per_day }}
+                        </p>
+                    {% endif %}
+
+                    {% if checkin.notes %}
+                        <p class="history-detail history-notes">
+                            <strong>Personal reflection:</strong>
+                            {{ checkin.notes }}
+                        </p>
+                    {% endif %}
+                </article>
+            {% endfor %}
+        </section>
+    {% else %}
+        <section class="history-empty">
+            <div class="history-empty-icon">🌱</div>
+            <h2>Your journey starts here</h2>
+            <p>
+                You haven't recorded any check-ins yet.
+                Your reflections will appear here once you begin.
+            </p>
+            <a href="{% url 'daily_checkin' %}" class="history-start">
+                Complete Your First Check-In →
+            </a>
+        </section>
+    {% endif %}
+</div>
+{% endblock %}

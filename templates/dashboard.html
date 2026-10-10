@@ -162,6 +162,31 @@
 
     </section>
 
+    
+<!-- CHECK-IN HISTORY NAVIGATION -->
+<section class="history-navigation-card">
+    <div class="history-navigation-content">
+        <div class="history-navigation-icon">📖</div>
+
+        <div>
+            <p class="card-label">YOUR WELLBEING JOURNEY</p>
+            <h2>Your Check-In History</h2>
+            <p>
+                Revisit your previous reflections and explore
+                how your mood, stress and daily habits have
+                changed over time.
+            </p>
+        </div>
+    </div>
+
+    <a href="{% url 'checkin_history' %}"
+       class="history-navigation-button">
+        View Your History
+        <span aria-hidden="true">→</span>
+    </a>
+</section>
+
+
     <!-- PROGRESS CHART -->
     <section class="progress-card" id="progress-chart">
         <div class="progress-header">
@@ -258,6 +283,7 @@
         {% endif %}
     </section>
 
+    
     <!-- RECOVERY INSIGHTS AND RESOURCES -->
     <section class="dashboard-bottom-grid">
 

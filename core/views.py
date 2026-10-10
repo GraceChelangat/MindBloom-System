@@ -134,6 +134,21 @@ def dashboard(request):
 
 
 @login_required(login_url='login')
+def checkin_history(request):
+    checkins = DailyCheckIn.objects.filter(
+        user=request.user
+    ).order_by('-created_at')
+
+    context = {
+        'checkins': checkins,
+        'total_checkins': checkins.count(),
+    }
+
+    return render(request, 'checkin_history.html', context)
+
+
+
+@login_required(login_url='login')
 def nutrition_questionnaire(request):
     if request.method == 'POST':
         form = NutritionLifestyleQuestionnaireForm(request.POST)

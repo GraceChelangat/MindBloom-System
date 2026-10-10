@@ -10,22 +10,7 @@
 		<h1>Support, in one <span>simple place.</span></h1>
 		<p>Practical guidance for understanding, supporting and getting help.</p>
 
-		<div class="resource-search">
-			<span aria-hidden="true">⌕</span>
-			<input id="resourceSearch" type="search" placeholder="Search by topic..." aria-label="Search resources">
-		</div>
-
-		<div class="resource-tools" aria-label="Resource filters">
-			<button type="button" class="resource-filter is-active" data-filter="all">All</button>
-			<button type="button" class="resource-filter" data-filter="understanding">Understanding</button>
-			<button type="button" class="resource-filter" data-filter="families">Families</button>
-			<button type="button" class="resource-filter" data-filter="schools">Schools</button>
-			<button type="button" class="resource-filter" data-filter="help">Get help</button>
-			<label class="resource-toggle">
-				<input id="essentialsToggle" type="checkbox">
-				<span>Essentials only</span>
-			</label>
-		</div>
+		
 	</header>
 
 	<nav class="resource-category-grid" aria-label="Resource categories">
@@ -33,6 +18,11 @@
 			<div class="resource-category-icon">🌱</div>
 			<h3>Understanding AN</h3>
 			<p>Learn the basics</p>
+		</a>
+		<a class="resource-category" href="#recovery" data-category="recovery">
+			<div class="resource-category-icon peach-icon">↗</div>
+			<h3>AN Recovery</h3>
+			<p>Stages and support</p>
 		</a>
 		<a class="resource-category" href="#families" data-category="families">
 			<div class="resource-category-icon peach-icon">♡</div>
@@ -59,28 +49,164 @@
 				<h2>What is Anorexia Nervosa?</h2>
 			</div>
 		</div>
-		<div class="an-info-grid">
-			<article class="mini-resource-card" data-resource-card data-essential="true">
-				<span class="mini-icon">🌿</span>
-				<h3>What is it?</h3>
-				<p>An eating disorder that can affect mental and physical health.</p>
+		<div class="an-overview" data-resource-card data-essential="true">
+			<p class="an-lead">Anorexia nervosa (AN) is a serious eating disorder and mental health condition characterized by persistent restriction of food intake, an intense fear of gaining weight or behaviours that interfere with weight gain, and a distorted perception of body weight or shape.</p>
+			<p>People experiencing anorexia nervosa may place excessive importance on their body weight or appearance when evaluating themselves.</p>
+			<p>AN is not simply about food or wanting to be thin. It is a complex condition involving psychological, biological, emotional and social factors.</p>
+		</div>
+
+		<div class="an-topic-grid">
+			<article class="an-topic" data-resource-card data-essential="true">
+				<h3>1. Main characteristics</h3>
+				<ol>
+					<li><strong>Restriction of food intake:</strong> Consistently eating less than the body needs, potentially leading to significantly low body weight.</li>
+					<li><strong>Fear of weight gain:</strong> Experiencing intense anxiety about gaining weight, even when underweight.</li>
+					<li><strong>Distorted body image:</strong> Perceiving one's body inaccurately or placing excessive importance on weight and shape.</li>
+					<li><strong>Eating-related behaviours:</strong> Following rigid food rules, avoiding meals or engaging in other behaviours that interfere with adequate nourishment.</li>
+					<li><strong>Emotional difficulties:</strong> Experiencing anxiety, depression, guilt, perfectionism or difficulties regulating emotions.</li>
+				</ol>
 			</article>
-			<article class="mini-resource-card" data-resource-card>
-				<span class="mini-icon">♡</span>
-				<h3>Recovery</h3>
-				<p>Recovery is possible with medical, nutritional and psychological support.</p>
+
+			<article class="an-topic" data-resource-card>
+				<h3>2. Types of anorexia nervosa</h3>
+				<div class="an-table-wrap">
+					<table class="an-types-table">
+						<caption>Commonly described clinical subtypes</caption>
+						<thead>
+							<tr><th scope="col">Type</th><th scope="col">Description</th></tr>
+						</thead>
+						<tbody>
+							<tr><th scope="row">Restricting type (AN-R)</th><td>Weight loss occurs primarily through dietary restriction, fasting or excessive exercise, without recurrent binge-eating or purging episodes during the relevant assessment period.</td></tr>
+							<tr><th scope="row">Binge-eating/purging type (AN-BP)</th><td>Recurrent binge-eating or purging behaviours, such as self-induced vomiting or misuse of laxatives, occur during the relevant assessment period.</td></tr>
+						</tbody>
+					</table>
+				</div>
 			</article>
-			<article class="mini-resource-card" data-resource-card data-essential="true">
-				<span class="mini-icon">☀</span>
-				<h3>Getting support</h3>
-				<p>You can ask for help before things feel severe.</p>
+
+			<article class="an-topic" data-resource-card>
+				<h3>3. Effects of anorexia nervosa</h3>
+				<p>AN can affect several areas of health:</p>
+				<ul>
+					<li><strong>Physical:</strong> Fatigue, dizziness, hormonal changes, weakened bones and cardiovascular complications.</li>
+					<li><strong>Psychological:</strong> Anxiety, depression, difficulty concentrating and persistent concerns about food or body image.</li>
+					<li><strong>Social:</strong> Withdrawal from friends and family, relationship difficulties and reduced participation in everyday activities.</li>
+					<li><strong>Academic:</strong> Reduced concentration, memory difficulties and declining performance.</li>
+				</ul>
+				<p>Some complications can become life-threatening. Recovery is possible with appropriate medical, nutritional and psychological treatment.</p>
+			</article>
+
+			<article class="an-topic" data-resource-card data-essential="true">
+				<h3>4. Relapse and possible warning signs</h3>
+				<p>Relapse refers to the return or significant worsening of eating-disorder symptoms after a period of improvement or recovery.</p>
+				<p>Possible warning signs include increased food restriction, renewed distress about body image, withdrawal from social activities and a return to harmful eating-related behaviours.</p>
+				<p>These signs do not by themselves confirm a relapse. A qualified professional can assess what is happening and help determine appropriate support.</p>
+			</article>
+
+			<article class="an-topic an-topic-wide" data-resource-card>
+				<h3>5. Why this matters to MindBloom</h3>
+				<p>MindBloom is a web-based project exploring mood, eating behaviours and potential relapse-related patterns among teenagers and young adults. It supports reflection on:</p>
+				<ul class="an-monitor-list">
+					<li><strong>Mood patterns:</strong> Emotional changes such as sadness, anxiety and stress.</li>
+					<li><strong>Eating behaviours:</strong> Self-reported eating difficulties and changes in eating patterns.</li>
+					<li><strong>Sleep patterns:</strong> Changes in sleep duration and quality.</li>
+					<li><strong>Behavioural trends:</strong> Changes in recorded experiences over time.</li>
+					<li><strong>Potential warning signs:</strong> Patterns that may warrant further professional assessment.</li>
+				</ul>
+				<p>These records may help users reflect and provide longitudinal information for conversations with professionals. Accurate relapse prediction requires an appropriately validated model and clinical evidence; the current exploratory food-craving model does not establish relapse risk.</p>
+			</article>
+		</div>
+	</section>
+
+	<section class="resource-section" id="recovery" data-resource-section="recovery">
+		<div class="resource-section-heading">
+			<span class="resource-number">02</span>
+			<div>
+				<p class="eyebrow">RECOVERY</p>
+				<h2>Anorexia Nervosa Recovery</h2>
+			</div>
+		</div>
+		<div class="an-overview" data-resource-card data-essential="true">
+			<p class="an-lead">Recovery means restoring physical health, developing healthier eating behaviours, improving psychological wellbeing and rebuilding a balanced relationship with food, body image and everyday life.</p>
+			<p>It is not simply about gaining weight. Recovery also addresses emotional, psychological and behavioural factors that contribute to an eating disorder.</p>
+			<p>The stages often overlap, and recovery is not always linear. Care should be individualized and guided by qualified professionals.</p>
+		</div>
+
+		<div class="an-topic-grid">
+			<article class="an-topic" data-resource-card data-essential="true">
+				<h3>1. Stages of recovery</h3>
+				<ol>
+					<li><strong>Recognition and acceptance:</strong> Recognizing the eating disorder and understanding the need for professional support.</li>
+					<li><strong>Medical stabilization:</strong> Addressing malnutrition, physical complications and immediate health concerns under medical supervision.</li>
+					<li><strong>Nutritional rehabilitation:</strong> Restoring adequate, consistent nutrition and gradually establishing more flexible eating patterns.</li>
+					<li><strong>Psychological recovery:</strong> Addressing fear of weight gain, body-image distress, anxiety and unhelpful thinking patterns through therapy.</li>
+					<li><strong>Behavioural recovery:</strong> Reducing restrictive eating, compulsive exercise and other eating-disorder behaviours.</li>
+					<li><strong>Maintenance and relapse prevention:</strong> Developing coping strategies, recognizing warning signs and maintaining professional and social support.</li>
+				</ol>
+			</article>
+
+			<article class="an-topic" data-resource-card>
+				<h3>2. Important aspects of recovery</h3>
+				<ul>
+					<li><strong>Physical:</strong> Restoring nutritional health, energy, hormonal functioning and overall physical stability.</li>
+					<li><strong>Emotional:</strong> Learning to recognize and manage emotions without relying on harmful eating behaviours.</li>
+					<li><strong>Psychological:</strong> Developing healthier beliefs about food, weight, body image and self-worth.</li>
+					<li><strong>Social:</strong> Rebuilding relationships, joining social activities and reducing isolation.</li>
+					<li><strong>Behavioural:</strong> Establishing consistent eating routines and reducing restrictive or compensatory behaviours.</li>
+				</ul>
+			</article>
+
+			<article class="an-topic" data-resource-card data-essential="true">
+				<h3>3. Treatment approaches</h3>
+				<p>Recovery typically involves coordinated care from healthcare professionals. Approaches may include:</p>
+				<ul>
+					<li><strong>Medical monitoring:</strong> Assessing physical health and managing complications.</li>
+					<li><strong>Nutritional support:</strong> Working with an eating-disorder-informed dietitian to restore adequate nutrition.</li>
+					<li><strong>CBT-ED:</strong> Cognitive Behavioural Therapy for Eating Disorders can address eating-disorder thoughts and behaviours.</li>
+					<li><strong>Family-Based Treatment:</strong> Often used with adolescents, with family members actively supporting recovery as part of care.</li>
+					<li><strong>Psychological support:</strong> Addressing anxiety, depression, perfectionism and other contributing difficulties.</li>
+				</ul>
+				<p>For someone who has been significantly restricting food, nutritional rehabilitation may need medical supervision because of complications such as refeeding syndrome.</p>
+			</article>
+
+			<article class="an-topic" data-resource-card data-essential="true">
+				<h3>4. Relapse during recovery</h3>
+				<p>A relapse is when eating-disorder symptoms return or significantly worsen after a period of improvement.</p>
+				<p>Possible warning signs include increased food restriction, renewed fear surrounding eating, worsening body-image distress, compulsive exercise and social withdrawal.</p>
+				<p>An isolated difficult day does not necessarily indicate relapse. Clinicians assess changes in the context of a person's overall health and treatment history. Recovery can include setbacks.</p>
+			</article>
+
+			<article class="an-topic an-topic-wide" data-resource-card>
+				<h3>5. Recovery monitoring and MindBloom</h3>
+				<div class="an-table-wrap">
+					<table class="an-types-table">
+						<caption>How MindBloom features could support reflection during recovery</caption>
+						<thead>
+							<tr><th scope="col">MindBloom feature</th><th scope="col">Contribution to recovery monitoring</th></tr>
+						</thead>
+						<tbody>
+							<tr><th scope="row">Daily mood check-ins</th><td>Help users notice emotional patterns.</td></tr>
+							<tr><th scope="row">Eating-behaviour tracking</th><td>Records changes in self-reported eating difficulties.</td></tr>
+							<tr><th scope="row">Sleep monitoring</th><td>Helps identify changes in sleep patterns.</td></tr>
+							<tr><th scope="row">Progress dashboard</th><td>Displays trends in recorded experiences over time.</td></tr>
+							<tr><th scope="row">Reflection journal</th><td>Encourages emotional awareness and self-reflection.</td></tr>
+							<tr><th scope="row">Professional support</th><td>Could support communication with healthcare providers, subject to consent and privacy safeguards.</td></tr>
+						</tbody>
+					</table>
+				</div>
+				<p>MindBloom should emphasize recovery progress rather than weight, calories or appearance. Future relapse-risk prediction or clinical alerts would require validated evidence and appropriate professional oversight.</p>
+			</article>
+
+			<article class="an-topic an-topic-wide" data-resource-card data-essential="true">
+				<h3>6. Signs of recovery progress</h3>
+				<p>Progress may include greater flexibility around food, reduced eating-related anxiety, improved energy and concentration, increased social engagement, more stable physical health and an improved ability to manage difficult emotions.</p>
+				<p>These changes may happen at different rates. Progress is best considered holistically rather than measured by a single indicator.</p>
 			</article>
 		</div>
 	</section>
 
 	<section class="resource-section" id="families" data-resource-section="families">
 		<div class="resource-section-heading">
-			<span class="resource-number">02</span>
+			<span class="resource-number">03</span>
 			<div>
 				<p class="eyebrow">FOR FAMILIES</p>
 				<h2>Supporting someone you love</h2>
@@ -96,7 +222,7 @@
 
 	<section class="resource-section" id="schools" data-resource-section="schools">
 		<div class="resource-section-heading">
-			<span class="resource-number">03</span>
+			<span class="resource-number">04</span>
 			<div>
 				<p class="eyebrow">FOR SCHOOLS</p>
 				<h2>Creating a supportive environment</h2>
@@ -112,7 +238,7 @@
 
 	<section class="resource-section" id="help" data-resource-section="help">
 		<div class="resource-section-heading">
-			<span class="resource-number">04</span>
+			<span class="resource-number">05</span>
 			<div>
 				<p class="eyebrow">GET HELP</p>
 				<h2>Need support right now?</h2>
@@ -125,9 +251,9 @@
 				<p>If you are in immediate danger or experiencing a medical emergency, seek urgent help.</p>
 			</div>
 			<div class="emergency-numbers">
-				<a class="emergency-number" href="tel:999"><span>Emergency</span><strong>999</strong><small>Call now →</small></a>
-				<a class="emergency-number" href="tel:112"><span>Emergency</span><strong>112</strong><small>Call now →</small></a>
-				<a class="emergency-number" href="tel:116"><span>Child Helpline</span><strong>116</strong><small>Call now →</small></a>
+				<a class="emergency-number" href="tel:999"><span>Emergency</span><strong>999</strong></a>
+				<a class="emergency-number" href="tel:112"><span>Emergency</span><strong>112</strong></a>
+				<a class="emergency-number" href="tel:116"><span>Child Helpline</span><strong>116</strong></a>
 			</div>
 		</div>
 		<div class="trusted-support">
@@ -141,35 +267,43 @@
 
 <script>
 	(function () {
-		var search = document.getElementById('resourceSearch');
 		var essentials = document.getElementById('essentialsToggle');
 		var sections = document.querySelectorAll('[data-resource-section]');
 		var filters = document.querySelectorAll('.resource-filter');
 		var activeFilter = 'all';
 
 		function updateResources() {
-			var query = search.value.toLowerCase().trim();
 			sections.forEach(function (section) {
 				var categoryMatch = activeFilter === 'all' || section.dataset.resourceSection === activeFilter;
 				var visible = 0;
 				section.querySelectorAll('[data-resource-card]').forEach(function (card) {
-					var matches = (!query || card.textContent.toLowerCase().includes(query)) &&
-						(!essentials.checked || card.dataset.essential === 'true');
-					card.hidden = !categoryMatch || !matches;
-					if (categoryMatch && matches) visible += 1;
+					var essentialMatch = !essentials.checked || card.dataset.essential === 'true';
+					card.hidden = !categoryMatch || !essentialMatch;
+					if (categoryMatch && essentialMatch) visible += 1;
 				});
 				section.hidden = !categoryMatch || visible === 0;
 			});
 		}
 
-		search.addEventListener('input', updateResources);
 		essentials.addEventListener('change', updateResources);
 		filters.forEach(function (filter) {
 			filter.addEventListener('click', function () {
 				activeFilter = filter.dataset.filter;
-				filters.forEach(function (item) { item.classList.remove('is-active'); });
+				filters.forEach(function (item) {
+					item.classList.remove('is-active');
+					item.setAttribute('aria-pressed', 'false');
+				});
 				filter.classList.add('is-active');
+				filter.setAttribute('aria-pressed', 'true');
 				updateResources();
+			});
+		});
+
+		document.querySelectorAll('.resource-category').forEach(function (category) {
+			category.addEventListener('click', function () {
+				var selectedFilter = category.dataset.category;
+				var matchingFilter = document.querySelector('.resource-filter[data-filter="' + selectedFilter + '"]');
+				if (matchingFilter) matchingFilter.click();
 			});
 		});
 	}());
