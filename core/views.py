@@ -4,6 +4,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import TeenagerYoungAdult
+from django.shortcuts import render, redirect
+
+
+from .forms import DailyCheckInForm
 
 
 def home(request):
@@ -120,3 +124,34 @@ def contact(request):
 
 def forgot_password(request):
     return render(request, 'forgot_password.html')
+
+@login_required
+def daily_checkin(request):
+
+    if request.method == "POST":
+        form = DailyCheckInForm(request.POST)
+
+        if form.is_valid():
+            checkin = form.save(commit=False)
+
+            # Associate the check-in with the logged-in user
+            checkin.user = request.user
+
+            # Save the check-in to MariaDB
+            checkin.save()
+
+            messages.success(
+                request,
+                "Your daily check-in has been saved successfully!"
+            )
+
+            return redirect("dashboard")
+
+    else:
+        form = DailyCheckInForm()
+
+    return render(
+        request,
+        "daily_checkin.html",
+        {"form": form}
+    )
