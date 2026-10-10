@@ -253,6 +253,59 @@
         </a>
     </section>
 
+    
+<!-- CHECK-IN HISTORY DATE FILTER -->
+<section class="history-filter-card">
+    <div class="history-filter-heading">
+        <div>
+            <p class="history-eyebrow">FIND YOUR REFLECTIONS</p>
+            <h2>Filter by Date</h2>
+            <p>
+                Choose a date range to explore your previous
+                wellbeing check-ins.
+            </p>
+        </div>
+        <span class="history-filter-icon">📅</span>
+    </div>
+
+    <form method="get"
+          action="{% url 'checkin_history' %}"
+          class="history-filter-form">
+
+        <div class="history-filter-field">
+            <label for="from_date">From Date</label>
+            <input
+                type="date"
+                id="from_date"
+                name="from_date"
+                value="{{ from_date }}"
+            >
+        </div>
+
+        <div class="history-filter-field">
+            <label for="to_date">To Date</label>
+            <input
+                type="date"
+                id="to_date"
+                name="to_date"
+                value="{{ to_date }}"
+            >
+        </div>
+
+        <div class="history-filter-actions">
+            <button type="submit" class="history-filter-button">
+                Apply Filter →
+            </button>
+
+            <a href="{% url 'checkin_history' %}"
+               class="history-clear-button">
+                Clear
+            </a>
+        </div>
+    </form>
+</section>
+
+
     <section class="history-overview">
         <div class="history-overview-icon">📅</div>
         <div>
@@ -321,6 +374,55 @@
                 </article>
             {% endfor %}
         </section>
+        
+<!-- CHECK-IN HISTORY PAGINATION -->
+{% if page_obj.has_other_pages %}
+<nav class="history-pagination" aria-label="Check-in history pages">
+
+    <!-- PREVIOUS PAGE -->
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}&amp;from_date={{ from_date|urlencode }}&amp;to_date={{ to_date|urlencode }}"
+           class="pagination-button">
+            ← Previous
+        </a>
+    {% else %}
+        <span class="pagination-button disabled">
+            ← Previous
+        </span>
+    {% endif %}
+
+    <!-- PAGE NUMBERS -->
+    <div class="pagination-numbers">
+        {% for number in page_obj.paginator.page_range %}
+            {% if number == page_obj.number %}
+                <span class="pagination-number active"
+                      aria-current="page">
+                    {{ number }}
+                </span>
+            {% else %}
+                <a href="?page={{ number }}"
+                   class="pagination-number">
+                    {{ number }}
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- NEXT PAGE -->
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}"
+           class="pagination-button">
+            Next →
+        </a>
+    {% else %}
+        <span class="pagination-button disabled">
+            Next →
+        </span>
+    {% endif %}
+
+</nav>
+{% endif %}
+
     {% else %}
         <section class="history-empty">
             <div class="history-empty-icon">🌱</div>
