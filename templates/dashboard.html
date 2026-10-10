@@ -70,11 +70,28 @@
                     wellbeing and lifestyle patterns.
                 </p>
 
-                <a href="{% url 'daily_checkin' %}" class="card-link">
-                    Start check-in →
-                </a>
+                
 
-            </div>
+<div class="checkin-status-group">
+    {% if checked_in_today %}
+        <p class="checkin-complete">
+            ✓ Today's check-in completed
+        </p>
+        <a href="{% url 'daily_checkin' %}" class="card-link">
+                <p>
+                    Add another check-in →
+                </p>
+        </a>
+    {% else %}
+        <p class="checkin-pending">
+            Your daily check-in is waiting 🌱
+        </p>
+        <a href="{% url 'daily_checkin' %}" class="card-link">
+            Start check-in →
+        </a>
+    {% endif %}
+</div>
+
 
         </article>
 
