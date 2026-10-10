@@ -1,17 +1,18 @@
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import TeenagerYoungAdult
-from django.shortcuts import render, redirect
+from django.utils import timezone
 
-
+from .models import TeenagerYoungAdult, DailyCheckIn
 from .forms import DailyCheckInForm, NutritionLifestyleQuestionnaireForm
 
 
 def home(request):
     return render(request, 'home.html')
+
 
 def signup(request):
     if request.method == 'POST':
@@ -54,10 +55,10 @@ def signup(request):
             request,
             'Account created successfully. You can now log in.'
         )
-
         return redirect('login')
 
     return render(request, 'signup.html')
+
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -84,26 +85,74 @@ def login_view(request):
 
     return render(request, 'login.html')
 
+
 def logout_view(request):
     logout(request)
-    messages.success(request, 'You have been logged out successfully.')
+    messages.success(
+        request,
+        'You have been logged out successfully.'
+    )
     return redirect('home')
+
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    checkins = DailyCheckIn.objects.filter(
+        user=request.user
+    ).order_by('-created_at')
 
+    latest_checkin = checkins.first()
+    today = timezone.localdate()
+
+    checked_in_today = checkins.filter(
+        created_at__date=today
+    ).exists()
+
+    recent_checkins = list(checkins[:7])
+    recent_checkins.reverse()
+
+    chart_points = []
+
+    for checkin in recent_checkins:
+        chart_points.append({
+            'date': timezone.localtime(
+                checkin.created_at
+            ).strftime('%d %b'),
+            'mood': checkin.mood_level,
+            'stress': checkin.stress_level,
+        })
+
+    context = {
+        'latest_checkin': latest_checkin,
+        'checked_in_today': checked_in_today,
+        'total_checkins': checkins.count(),
+        'recent_checkins': recent_checkins,
+        'chart_points': chart_points,
+    }
+
+    return render(request, 'dashboard.html', context)
+
+
+@login_required(login_url='login')
 def nutrition_questionnaire(request):
     if request.method == 'POST':
         form = NutritionLifestyleQuestionnaireForm(request.POST)
+
         if form.is_valid():
             form.save(user=request.user)
-            messages.success(request, 'Your questionnaire has been saved. Thank you!')
+            messages.success(
+                request,
+                'Your questionnaire has been saved. Thank you!'
+            )
             return redirect('dashboard')
     else:
         form = NutritionLifestyleQuestionnaireForm()
 
-    return render(request, 'nutrition_questionnaire.html', {'form': form})
+    return render(
+        request,
+        'nutrition_questionnaire.html',
+        {'form': form}
+    )
 
 
 def resources(request):
@@ -125,33 +174,27 @@ def contact(request):
 def forgot_password(request):
     return render(request, 'forgot_password.html')
 
-@login_required
-def daily_checkin(request):
 
-    if request.method == "POST":
+@login_required(login_url='login')
+def daily_checkin(request):
+    if request.method == 'POST':
         form = DailyCheckInForm(request.POST)
 
         if form.is_valid():
             checkin = form.save(commit=False)
-
-            # Associate the check-in with the logged-in user
             checkin.user = request.user
-
-            # Save the check-in to MariaDB
             checkin.save()
 
             messages.success(
                 request,
-                "Your daily check-in has been saved successfully!"
+                'Your daily check-in has been saved successfully!'
             )
-
-            return redirect("dashboard")
-
+            return redirect('dashboard')
     else:
         form = DailyCheckInForm()
 
     return render(
         request,
-        "checkin.html",
-        {"form": form}
+        'checkin.html',
+        {'form': form}
     )

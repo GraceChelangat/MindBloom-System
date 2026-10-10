@@ -1,465 +1,446 @@
-{% extends 'base.html' %}
 
+{% extends 'base.html' %}
 {% block title %}Dashboard | MindBloom{% endblock %}
 
 {% block content %}
-
 <div class="dashboard-page">
 
-    <!-- =====================================================
-         DASHBOARD HEADER
-    ===================================================== -->
+    <!-- WELCOME SECTION -->
     <section class="dashboard-welcome">
-
         <div>
-
-            <p class="eyebrow">
-                YOUR SPACE
-            </p>
-
+            <p class="eyebrow">YOUR SPACE</p>
             <h1>
                 Welcome back,
                 <span>{{ user.username }}.</span>
             </h1>
-
             <p>
                 How are you feeling today?
                 Take a moment to check in with yourself.
             </p>
-
         </div>
-
 
         <div class="dashboard-date">
-
             <span>Today</span>
-
-            <strong>
-                {% now "D, d M Y" %}
-            </strong>
-
+            <strong>{% now "D, d M Y" %}</strong>
         </div>
-
     </section>
 
-
-    <!-- =====================================================
-         QUICK ACTIONS
-    ===================================================== -->
+    <!-- DASHBOARD ACTION CARDS -->
     <section class="dashboard-actions">
 
         <!-- DAILY CHECK-IN -->
         <article class="dashboard-action-card">
-
-            <div class="dashboard-action-icon">
-                ✓
-            </div>
-
+            <div class="dashboard-action-icon">✓</div>
             <div>
-
-                <p class="card-label">
-                    DAILY WELLBEING
-                </p>
-
-                <h3>
-                    Daily Check-In
-                </h3>
-
+                <p class="card-label">DAILY WELLBEING</p>
+                <h3>Daily Check-In</h3>
                 <p>
                     Take a moment to reflect on today's
                     wellbeing and lifestyle patterns.
                 </p>
 
-                
-
-<div class="checkin-status-group">
-    {% if checked_in_today %}
-        <p class="checkin-complete">
-            ✓ Today's check-in completed
-        </p>
-        <a href="{% url 'daily_checkin' %}" class="card-link">
-                <p>
-                    Add another check-in →
-                </p>
-        </a>
-    {% else %}
-        <p class="checkin-pending">
-            Your daily check-in is waiting 🌱
-        </p>
-        <a href="{% url 'daily_checkin' %}" class="card-link">
-            Start check-in →
-        </a>
-    {% endif %}
-</div>
-
-
+                <div class="checkin-status-group">
+                    {% if checked_in_today %}
+                        <p class="checkin-complete">
+                            ✓ Today's check-in completed
+                        </p>
+                        <a href="{% url 'daily_checkin' %}" class="card-link">
+                            Add another check-in →
+                        </a>
+                    {% else %}
+                        <p class="checkin-pending">
+                            Your daily check-in is waiting 🌱
+                        </p>
+                        <a href="{% url 'daily_checkin' %}" class="card-link">
+                            Start check-in →
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
         </article>
-
 
         <!-- MOOD -->
         <article class="dashboard-action-card">
-
-            <div class="dashboard-action-icon peach-dashboard-icon">
-                ♡
-            </div>
-
+            <div class="dashboard-action-icon peach-dashboard-icon">♡</div>
             <div>
+                <p class="card-label">HOW YOU FEEL</p>
+                <h3>Mood</h3>
 
-                <p class="card-label">
-                    HOW YOU FEEL
-                </p>
+                <div class="mood-status-group">
+                    {% if latest_checkin %}
+                        <p class="mood-description">
+                            Your most recently recorded mood:
+                        </p>
 
-                <h3>
-                    Mood
-                </h3>
+                        <div class="mood-rating">
+                            <span class="mood-rating-icon">♡</span>
+                            <span class="mood-rating-number">
+                                {{ latest_checkin.mood_level }}/5
+                            </span>
+                        </div>
 
-                <p>
-                    Record how you're feeling today and
-                    build a picture of your emotional patterns.
-                </p>
+                        <p class="mood-updated">
+                            Recorded on
+                            {{ latest_checkin.created_at|date:"d M Y" }}
+                        </p>
 
-            
-{% if latest_checkin %}
-    <div class="mood-status-group">
-        <p class="mood-description">
-            Your most recently recorded mood:
-        </p>
-        <div class="mood-rating">
-            <span class="mood-rating-icon">♡</span>
-            <span class="mood-rating-number">
-                {{ latest_checkin.mood_level }}/5
-            </span>
-        </div>
-        <p class="mood-updated">
-            Recorded on {{ latest_checkin.created_at|date:"d M Y" }}
-        </p>
-        <a href="{% url 'daily_checkin' %}" class="card-link">
-            Record a new mood →
-        </a>
-    </div>
-{% else %}
-    <div class="mood-status-group">
-        <p class="mood-description">
-            Record how you're feeling today and
-            build a picture of your emotional patterns.
-        </p>
-        <p class="mood-empty">
-            No mood recorded yet 🌱
-        </p>
-        <a href="{% url 'daily_checkin' %}" class="card-link">
-            Record your first mood →
-        </a>
-    </div>
-{% endif %}
+                        <a href="{% url 'daily_checkin' %}" class="card-link">
+                            Record a new mood →
+                        </a>
+                    {% else %}
+                        <p class="mood-description">
+                            Record how you're feeling today and
+                            build a picture of your emotional patterns.
+                        </p>
 
+                        <p class="mood-empty">
+                            No mood recorded yet 🌱
+                        </p>
 
+                        <a href="{% url 'daily_checkin' %}" class="card-link">
+                            Record your first mood →
+                        </a>
+                    {% endif %}
+                </div>
             </div>
-
         </article>
-
 
         <!-- EATING BEHAVIOUR -->
         <article class="dashboard-action-card">
-
-            <div class="dashboard-action-icon">
-                🌱
-            </div>
-
+            <div class="dashboard-action-icon">🌱</div>
             <div>
+                <p class="card-label">DAILY PATTERNS</p>
+                <h3>Eating Behaviour</h3>
 
-                <p class="card-label">
-                    DAILY PATTERNS
-                </p>
+                <div class="eating-status-group">
+                    {% if latest_checkin %}
+                        <p class="eating-description">
+                            Your latest eating-related reflection:
+                        </p>
 
-                <h3>
-                    Eating Behaviour
-                </h3>
+                        {% if latest_checkin.eating_difficulties %}
+                            <div class="eating-status eating-support">
+                                <span>♡</span>
+                                <span>Eating difficulties reported</span>
+                            </div>
+                            <p class="eating-message">
+                                Thank you for checking in.
+                                You deserve support, patience and
+                                kindness throughout your journey.
+                            </p>
+                        {% else %}
+                            <div class="eating-status eating-neutral">
+                                <span>🌱</span>
+                                <span>No eating difficulties reported</span>
+                            </div>
+                            <p class="eating-message">
+                                This reflects your most recent check-in,
+                                not an assessment of your overall recovery.
+                            </p>
+                        {% endif %}
 
-                <p>
-                    Record your eating-related behaviours
-                    in a simple and supportive way.
-                </p>
+                        <p class="eating-updated">
+                            Recorded on
+                            {{ latest_checkin.created_at|date:"d M Y" }}
+                        </p>
+                    {% else %}
+                        <p class="eating-description">
+                            Reflect on your eating-related experiences
+                            in a supportive, judgment-free space.
+                        </p>
+                        <p class="eating-empty">
+                            No eating-related reflection recorded yet.
+                        </p>
+                    {% endif %}
 
-                <a href="{% url 'nutrition_questionnaire' %}" class="card-link">
-                    Add record →
-                </a>
-
+                    <a href="{% url 'nutrition_questionnaire' %}" class="card-link">
+                        Explore eating behaviour questionnaire →
+                    </a>
+                </div>
             </div>
-
         </article>
 
     </section>
 
-
-    <!-- =====================================================
-         PROGRESS
-    ===================================================== -->
-    <section class="progress-card">
-
+    <!-- PROGRESS CHART -->
+    <section class="progress-card" id="progress-chart">
         <div class="progress-header">
-
             <div>
-
-                <span class="card-label">
-                    YOUR PROGRESS
-                </span>
-
-                <h2>
-                    Progress over time
-                </h2>
-
+                <span class="card-label">YOUR PROGRESS</span>
+                <h2>Mood &amp; Stress Over Time</h2>
                 <p>
-                    A view of your recent patterns across mood,
-                    eating behaviour and daily wellbeing.
+                    Explore patterns in your most recent mood
+                    and stress ratings.
                 </p>
-
             </div>
-
-
-            <a href="#progress-chart"
-               class="card-link">
-
-                View progress chart →
-
-            </a>
-
-
+            <span class="card-label">
+                Last {{ recent_checkins|length }} check-ins
+            </span>
         </div>
 
-
-        <div class="multi-chart" id="progress-chart">
-
-            <div class="chart-y-title">
-                Rating
-                <br>
-                <small>(1–5)</small>
-            </div>
-
-
-            <div class="chart-wrapper">
-
-                <div class="chart-y-labels">
-                    <span>5</span>
-                    <span>4</span>
-                    <span>3</span>
-                    <span>2</span>
-                    <span>1</span>
+        {% if chart_points %}
+            <div class="multi-chart">
+                <div class="chart-y-title">
+                    Rating
+                    <br>
+                    <small>(1–5)</small>
                 </div>
 
-
-                <div class="chart-plot">
-
-                    <div class="chart-grid-line line-1"></div>
-                    <div class="chart-grid-line line-2"></div>
-                    <div class="chart-grid-line line-3"></div>
-                    <div class="chart-grid-line line-4"></div>
-                    <div class="chart-grid-line line-5"></div>
-
-
-                    <svg
-                        class="progress-chart"
-                        viewBox="0 0 600 200"
-                        preserveAspectRatio="none"
-                    >
-
-                        <!-- Mood -->
-                        <polyline
-                            class="mood-line"
-                            points="
-                            0,100
-                            100,50
-                            200,75
-                            300,50
-                            400,25
-                            500,45
-                            600,15"
-                        />
-
-
-                        <!-- Eating behaviour -->
-                        <polyline
-                            class="eating-line"
-                            points="
-                            0,150
-                            100,125
-                            200,100
-                            300,125
-                            400,100
-                            500,75
-                            600,100"
-                        />
-
-
-                        <!-- Daily check-in -->
-                        <polyline
-                            class="checkin-line"
-                            points="
-                            0,175
-                            100,150
-                            200,150
-                            300,125
-                            400,95
-                            500,110
-                            600,75"
-                        />
-
-                    </svg>
-
-
-                    <div class="chart-days">
-
-                        <span>Mon</span>
-                        <span>Tue</span>
-                        <span>Wed</span>
-                        <span>Thu</span>
-                        <span>Fri</span>
-                        <span>Sat</span>
-                        <span>Sun</span>
-
+                <div class="chart-wrapper">
+                    <div class="chart-y-labels">
+                        <span>5</span>
+                        <span>4</span>
+                        <span>3</span>
+                        <span>2</span>
+                        <span>1</span>
                     </div>
 
-                </div>
+                    <div class="chart-plot">
+                        <div class="chart-grid-line line-1"></div>
+                        <div class="chart-grid-line line-2"></div>
+                        <div class="chart-grid-line line-3"></div>
+                        <div class="chart-grid-line line-4"></div>
+                        <div class="chart-grid-line line-5"></div>
 
+                        <svg
+                            id="wellness-chart"
+                            class="progress-chart"
+                            viewBox="0 0 600 200"
+                            preserveAspectRatio="none"
+                            role="img"
+                            aria-label="Mood and stress ratings from recent check-ins"
+                        ></svg>
+
+                        <div class="chart-days" id="chart-dates">
+                            {% for point in chart_points %}
+                                <span>{{ point.date }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
 
-        </div>
+            <div class="chart-legend">
+                <span>
+                    <i class="legend-dot mood-dot"></i>
+                    Mood
+                </span>
+                <span>
+                    <i class="legend-dot stress-dot"></i>
+                    Stress
+                </span>
+            </div>
 
-
-        <!-- LEGEND -->
-        <div class="chart-legend">
-
-            <span>
-                <i class="legend-dot mood-dot"></i>
-                Mood
-            </span>
-
-            <span>
-                <i class="legend-dot eating-dot"></i>
-                Eating Behaviour
-            </span>
-
-            <span>
-                <i class="legend-dot checkin-dot"></i>
-                Daily Check-In
-            </span>
-
-        </div>
-
-
-        <p class="chart-note">
-            Sample display only — your recorded information
-            will appear here.
-        </p>
-
+            {% if recent_checkins|length == 1 %}
+                <p class="chart-note">
+                    Your first check-in is recorded.
+                    Add more check-ins to see trends over time.
+                </p>
+            {% else %}
+                <p class="chart-note">
+                    These ratings reflect your recorded experiences.
+                    They are not a clinical assessment.
+                </p>
+            {% endif %}
+        {% else %}
+            <div class="chart-empty-state">
+                <div class="chart-empty-icon">🌱</div>
+                <h3>Your journey starts here</h3>
+                <p>
+                    No check-ins have been recorded yet.
+                    Your mood and stress trends will appear
+                    after you begin checking in.
+                </p>
+                <a href="{% url 'daily_checkin' %}" class="card-link">
+                    Complete your first check-in →
+                </a>
+            </div>
+        {% endif %}
     </section>
 
-
-    <!-- =====================================================
-         RISK + RESOURCES
-    ===================================================== -->
+    <!-- RECOVERY INSIGHTS AND RESOURCES -->
     <section class="dashboard-bottom-grid">
 
-
-        <!-- RISK -->
+        <!-- RECOVERY INSIGHTS -->
         <article class="risk-card">
+            <div class="risk-icon">♡</div>
 
-            <div class="risk-icon">
-                ♡
-            </div>
+            <p class="card-label">YOUR WELLBEING</p>
+            <h2>Recovery Insights</h2>
 
-            <p class="card-label">
-                RELAPSE RISK
-            </p>
+            {% if latest_checkin %}
+                <div class="risk-status">
+                    <span class="risk-indicator"></span>
+                    <strong>
+                        {{ total_checkins }}
+                        check-in{{ total_checkins|pluralize }} recorded
+                    </strong>
+                </div>
 
-            <h2>
-                Risk Status
-            </h2>
+                <p>
+                    Your reflections can help you notice changes
+                    in mood, stress and daily routines over time.
+                </p>
 
-            <div class="risk-status">
+                <div class="recovery-summary">
+                    <p>
+                        <strong>Latest mood:</strong>
+                        {{ latest_checkin.mood_level }}/5
+                    </p>
+                    <p>
+                        <strong>Latest stress:</strong>
+                        {{ latest_checkin.stress_level }}/5
+                    </p>
 
-                <span class="risk-indicator"></span>
+                    {% if latest_checkin.sleep_hours is not None %}
+                        <p>
+                            <strong>Sleep recorded:</strong>
+                            {{ latest_checkin.sleep_hours }} hours
+                        </p>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="risk-status">
+                    <span class="risk-indicator"></span>
+                    <strong>No reflections recorded yet</strong>
+                </div>
 
-                <strong>
-                    Not yet assessed
-                </strong>
-
-            </div>
-
-            <p>
-                Complete your check-ins and records to help
-                MindBloom identify patterns over time.
-            </p>
+                <p>
+                    Complete a daily check-in to begin
+                    building your personal wellbeing history.
+                </p>
+            {% endif %}
 
             <small>
-                MindBloom provides risk monitoring support
-                and does not provide a medical diagnosis.
+                MindBloom supports self-reflection and pattern tracking.
+                It does not diagnose anorexia nervosa or
+                provide a validated relapse-risk assessment.
             </small>
-
         </article>
-
 
         <!-- RESOURCES -->
         <article class="dashboard-resources-card">
+            <div class="resources-card-icon">🌿</div>
 
-            <div class="resources-card-icon">
-                🌿
-            </div>
-
-            <p class="card-label">
-                SUPPORT & LEARNING
-            </p>
-
-            <h2>
-                Resources
-            </h2>
+            <p class="card-label">SUPPORT &amp; LEARNING</p>
+            <h2>Resources</h2>
 
             <p>
                 Find helpful information about anorexia nervosa,
-                recovery, family and school support, and where
-                to seek help.
+                recovery, family and school support,
+                and where to seek help.
             </p>
 
-
             <div class="dashboard-resource-links">
-
                 <a href="{% url 'resources' %}#understanding-an">
                     Understanding AN
                     <span>→</span>
                 </a>
 
-
                 <a href="{% url 'resources' %}#help">
                     Get Help
                     <span>→</span>
                 </a>
-
             </div>
 
-
-            <a href="{% url 'resources' %}"
-               class="btn btn-secondary dashboard-resource-button">
-
+            <a
+                href="{% url 'resources' %}"
+                class="btn btn-secondary dashboard-resource-button"
+            >
                 Explore all resources
-
             </a>
-
         </article>
-
     </section>
-
-
-    <!-- =====================================================
-         LOGOUT
-    ===================================================== -->
-    <div class="dashboard-logout">
-
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit" class="logout-btn">Log out</button>
-        </form>
-
-    </div>
 
 </div>
 
+<!-- SAFE DJANGO DATA TRANSFER -->
+{{ chart_points|json_script:"mindbloom-chart-data" }}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const dataElement = document.getElementById("mindbloom-chart-data");
+    const svg = document.getElementById("wellness-chart");
+
+    if (!dataElement || !svg) return;
+
+    const records = JSON.parse(dataElement.textContent);
+
+    if (!records.length) return;
+
+    const namespace = "http://www.w3.org/2000/svg";
+    const chartWidth = 600;
+    const chartHeight = 200;
+
+    function xPosition(index) {
+        if (records.length === 1) {
+            return chartWidth / 2;
+        }
+        return (index / (records.length - 1)) * chartWidth;
+    }
+
+    function yPosition(value) {
+        const rating = Math.max(1, Math.min(5, Number(value)));
+        return chartHeight - ((rating - 1) / 4) * chartHeight;
+    }
+
+    function drawSeries(key, color) {
+        const points = records.map((record, index) => {
+            return [
+                xPosition(index),
+                yPosition(record[key])
+            ];
+        });
+
+        if (points.length > 1) {
+            const line = document.createElementNS(
+                namespace,
+                "polyline"
+            );
+
+            line.setAttribute(
+                "points",
+                points.map(point => point.join(",")).join(" ")
+            );
+            line.setAttribute("fill", "none");
+            line.setAttribute("stroke", color);
+            line.setAttribute("stroke-width", "3");
+            line.setAttribute("stroke-linecap", "round");
+            line.setAttribute("stroke-linejoin", "round");
+
+            svg.appendChild(line);
+        }
+
+        points.forEach((point, index) => {
+            const circle = document.createElementNS(
+                namespace,
+                "circle"
+            );
+
+            circle.setAttribute("cx", point[0]);
+            circle.setAttribute("cy", point[1]);
+            circle.setAttribute("r", "4");
+            circle.setAttribute("fill", color);
+            circle.setAttribute("stroke", "#ffffff");
+            circle.setAttribute("stroke-width", "2");
+
+            const tooltip = document.createElementNS(
+                namespace,
+                "title"
+            );
+
+            tooltip.textContent =
+                records[index].date + " — " +
+                (key === "mood" ? "Mood" : "Stress") +
+                ": " + records[index][key] + "/5";
+
+            circle.appendChild(tooltip);
+            svg.appendChild(circle);
+        });
+    }
+
+    drawSeries("mood", "#527f52");
+    drawSeries("stress", "#e99479");
+});
+</script>
 {% endblock %}

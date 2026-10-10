@@ -2749,3 +2749,107 @@ p:last-of-type {
     width: fit-content;
     margin-top: 6px;
 }
+
+/* Dashboard eating behaviour card */
+.eating-status-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 14px;
+}
+.eating-status-group p {
+    margin: 0;
+}
+.eating-description {
+    color: #718078;
+    font-size: 15px;
+    line-height: 1.6;
+}
+.eating-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    max-width: 100%;
+    padding: 11px 15px;
+    border-radius: 18px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+.eating-support {
+    background: #f8e7df;
+    color: #935e4b;
+}
+.eating-neutral {
+    background: #e4efe1;
+    color: #416b57;
+}
+.eating-message {
+    color: #718078;
+    font-size: 13px;
+    line-height: 1.6;
+}
+.eating-updated {
+    color: #718078;
+    font-size: 12px;
+}
+.eating-empty {
+    padding: 10px 15px;
+    background: #fff0e6;
+    border-radius: 18px;
+    color: #a86b4d;
+    font-size: 13px;
+}
+.eating-status-group .card-link {
+    display: inline-flex;
+    width: fit-content;
+    margin-top: 6px;
+}
+
+/* Real-data dashboard chart */
+.chart-legend .stress-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #e99479;
+    border-radius: 50%;
+}
+.chart-empty-state {
+    padding: 55px 20px;
+    text-align: center;
+}
+.chart-empty-icon {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+.chart-empty-state h3 {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    color: #294d3d;
+    margin-bottom: 12px;
+}
+.chart-empty-state p {
+    color: #718078;
+    max-width: 480px;
+    margin: 0 auto 22px;
+    line-height: 1.7;
+}
+.chart-empty-state .card-link {
+    display: inline-block;
+}
+.recovery-summary {
+    background: #f7f9f4;
+    border: 1px solid #e4ede0;
+    border-radius: 16px;
+    padding: 15px 18px;
+    margin: 18px 0;
+}
+.recovery-summary p {
+    margin: 7px 0;
+    color: #536e5d;
+    font-size: 14px;
+}
+.recovery-summary strong {
+    color: #294d3d;
+}
