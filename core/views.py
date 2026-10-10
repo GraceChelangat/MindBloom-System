@@ -7,7 +7,7 @@ from .models import TeenagerYoungAdult
 from django.shortcuts import render, redirect
 
 
-from .forms import DailyCheckInForm
+from .forms import DailyCheckInForm, NutritionLifestyleQuestionnaireForm
 
 
 def home(request):
@@ -152,6 +152,6 @@ def daily_checkin(request):
 
     return render(
         request,
-        "daily_checkin.html",
+        "checkin.html",
         {"form": form}
     )

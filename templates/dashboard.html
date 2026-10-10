@@ -70,7 +70,7 @@
                     wellbeing and lifestyle patterns.
                 </p>
 
-                <a href="#" class="card-link">
+                <a href="{% url 'daily_checkin' %}" class="card-link">
                     Start check-in →
                 </a>
 
@@ -101,7 +101,7 @@
                     build a picture of your emotional patterns.
                 </p>
 
-                <a href="#" class="card-link">
+                <a href="{% url 'daily_checkin' %}" class="card-link">
                     Record mood →
                 </a>
 
@@ -132,7 +132,7 @@
                     in a simple and supportive way.
                 </p>
 
-                <a href="#" class="card-link">
+                <a href="{% url 'nutrition_questionnaire' %}" class="card-link">
                     Add record →
                 </a>
 
@@ -168,10 +168,10 @@
             </div>
 
 
-            <a href="#"
+            <a href="#progress-chart"
                class="card-link">
 
-                View full progress →
+                View progress chart →
 
             </a>
 
@@ -179,7 +179,7 @@
         </div>
 
 
-        <div class="multi-chart">
+        <div class="multi-chart" id="progress-chart">
 
             <div class="chart-y-title">
                 Rating
@@ -379,15 +379,6 @@
                     <span>→</span>
                 </a>
 
-                <a href="{% url 'resources' %}#families">
-                    Family Support
-                    <span>→</span>
-                </a>
-
-                <a href="{% url 'resources' %}#schools">
-                    School Support
-                    <span>→</span>
-                </a>
 
                 <a href="{% url 'resources' %}#help">
                     Get Help
@@ -414,12 +405,10 @@
     ===================================================== -->
     <div class="dashboard-logout">
 
-        <a href="{% url 'logout' %}"
-           class="logout-btn">
-
-            Log out
-
-        </a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Log out</button>
+        </form>
 
     </div>
 

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .checkin-container {
+        max-width: 720px;
+        margin: 40px auto;
+        padding: 35px;
+        background: #fffdf8;
+        border-radius: 18px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    .checkin-title {
+        color: #527a65;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 12px;
+    }
+
+    .checkin-subtitle {
+        color: #777;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .checkin-field {
+        margin-bottom: 22px;
+    }
+
+    .checkin-field label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #405c4c;
+    }
+
+    .checkin-field input:not([type="checkbox"]),
+    .checkin-field select,
+    .checkin-field textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d6e3d9;
+        border-radius: 9px;
+        background: white;
+    }
+
+    .checkin-field input[type="checkbox"] {
+        width: auto;
+        margin-right: 8px;
+    }
+
+    .checkin-field .errorlist {
+        color: #a32626;
+        margin-top: 6px;
+    }
+
+    .checkin-button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: #779b83;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .checkin-button:hover {
+        background: #5d8069;
+    }
+
+    .checkin-note {
+        margin-top: 20px;
+        text-align: center;
+        color: #777;
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="checkin-container">
+
+    <a class="page-back-link" href="{% url 'dashboard' %}"><span aria-hidden="true">←</span> Back</a>
+    <h2 class="checkin-title">🌱 Daily Check-In</h2>
+
+    <p class="checkin-subtitle">
+        Take a moment to reflect on how you're feeling today.
+        Every experience matters.
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="checkin-field">
+
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+
+                {{ field }}
+
+                {% if field.help_text %}
+                    <small>{{ field.help_text }}</small>
+                {% endif %}
+
+                {% for error in field.errors %}
+                    <div class="errorlist">{{ error }}</div>
+                {% endfor %}
+
+            </div>
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+            <div class="errorlist">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <button type="submit" class="checkin-button">
+            Save My Check-In 🌸
+        </button>
+    </form>
+
+    <p class="checkin-note">
+        Your reflections are personal and are not a clinical diagnosis.
+    </p>
+
+</div>
+
+{% endblock %}

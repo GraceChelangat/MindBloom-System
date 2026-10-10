@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from core import views
+from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,4 +16,5 @@ urlpatterns = [
     path('terms/', views.terms, name='terms'),
     path('contact/', views.contact, name='contact'),
     path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path("daily-checkin/", views.daily_checkin, name="daily_checkin"),
 ]
