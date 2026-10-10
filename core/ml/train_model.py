@@ -3,6 +3,9 @@ import joblib
 import numpy as np
 import pyreadr
 
+from sklearn.linear_model import Ridge
+from sklearn.preprocessing import StandardScaler
+
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -63,6 +66,75 @@ model.fit(X_train, y_train)
 
 # Evaluate on unseen participants
 predictions = model.predict(X_test)
+
+# Train Ridge Regression for comparison
+ridge_model = Pipeline([
+    ("imputer", SimpleImputer(strategy="median")),
+    ("scaler", StandardScaler()),
+    ("regressor", Ridge(alpha=10.0)),
+])
+
+ridge_model.fit(X_train, y_train)
+
+ridge_predictions = ridge_model.predict(X_test)
+
+print("\nRIDGE REGRESSION PERFORMANCE")
+print("=" * 45)
+
+print(
+    f"MAE: {mean_absolute_error(y_test, ridge_predictions):.4f}"
+)
+
+print(
+    f"RMSE: {np.sqrt(mean_squared_error(y_test, ridge_predictions)):.4f}"
+)
+
+print(
+    f"R²: {r2_score(y_test, ridge_predictions):.4f}"
+)
+
+from sklearn.dummy import DummyRegressor
+
+baseline = DummyRegressor(strategy="mean")
+baseline.fit(X_train, y_train)
+
+baseline_predictions = baseline.predict(X_test)
+
+print("\nBASELINE MODEL PERFORMANCE")
+print("=" * 45)
+
+print(
+    "Baseline MAE:",
+    round(mean_absolute_error(y_test, baseline_predictions), 4)
+)
+
+print(
+    "Baseline RMSE:",
+    round(np.sqrt(mean_squared_error(y_test, baseline_predictions)), 4)
+)
+
+print(
+    "Baseline R²:",
+    round(r2_score(y_test, baseline_predictions), 4)
+)
+from sklearn.dummy import DummyRegressor
+
+# Baseline model: always predicts the training-set mean
+baseline = DummyRegressor(strategy="mean")
+baseline.fit(X_train, y_train)
+
+baseline_predictions = baseline.predict(X_test)
+
+baseline_mae = mean_absolute_error(y_test, baseline_predictions)
+baseline_rmse = np.sqrt(
+    mean_squared_error(y_test, baseline_predictions)
+)
+baseline_r2 = r2_score(y_test, baseline_predictions)
+
+print("\nBASELINE MODEL PERFORMANCE")
+print(f"Baseline MAE: {baseline_mae:.4f}")
+print(f"Baseline RMSE: {baseline_rmse:.4f}")
+print(f"Baseline R²: {baseline_r2:.4f}")
 
 mae = mean_absolute_error(y_test, predictions)
 rmse = np.sqrt(mean_squared_error(y_test, predictions))
