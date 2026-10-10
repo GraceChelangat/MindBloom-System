@@ -1,56 +1,84 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>{% block title %}MindBloom{% endblock %}</title>
-
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-
 <body>
+    <div class="site-header-wrap">
+        <header class="navbar">
+            <a href="{% url 'home' %}" class="brand" aria-label="MindBloom Home">
+                <span class="brand-mark" aria-hidden="true">🌱</span>
+                <span class="brand-text">
+                    <span class="brand-name">Mind<span>Bloom</span></span>
+                    <span class="brand-tagline">MINDS GROW HERE</span>
+                </span>
+            </a>
 
-    <header class="navbar">
-        <a href="{% url 'home' %}" class="brand">
-            <div class="brand-mark">🌱</div>
-            <div>
-                <span class="brand-name">MindBloom</span>
-                <span class="brand-tagline">MINDS GROW HERE</span>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="{% url 'home' %}"
+                   class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                   {% if request.resolver_match.url_name == 'home' %}aria-current="page"{% endif %}>
+                    <span class="nav-icon" aria-hidden="true">⌂</span> Home
+                </a>
+                <a href="{% url 'home' %}#about" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">♧</span> About
+                </a>
+                <a href="{% url 'resources' %}"
+                   class="nav-link {% if request.resolver_match.url_name == 'resources' %}active{% endif %}"
+                   {% if request.resolver_match.url_name == 'resources' %}aria-current="page"{% endif %}>
+                    <span class="nav-icon" aria-hidden="true">▤</span> Resources
+                </a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard' %}"
+                       class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+                       {% if request.resolver_match.url_name == 'dashboard' %}aria-current="page"{% endif %}>
+                        Dashboard
+                    </a>
+                    <a href="{% url 'daily_checkin' %}"
+                       class="nav-link {% if request.resolver_match.url_name == 'daily_checkin' %}active{% endif %}"
+                       {% if request.resolver_match.url_name == 'daily_checkin' %}aria-current="page"{% endif %}>
+                        Daily Check-In
+                    </a>
+                {% endif %}
+            </nav>
+
+            <div class="nav-actions">
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline">Log out</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline">
+                        <span aria-hidden="true">♙</span> Log in
+                    </a>
+                    <a href="{% url 'signup' %}" class="btn btn-primary">
+                        <span aria-hidden="true">🌱</span> Join Our Community
+                    </a>
+                {% endif %}
             </div>
-        </a>
-
-        <nav class="nav-links">
-            <a href="{% url 'home' %}" class="active">Home</a>
-            <a href="{% url 'home' %}#about">About</a>
-            <a href="{% url 'resources' %}">Resources</a>
-        </nav>
-
-        <div class="nav-actions">
-            {% if user.is_authenticated %}
-            <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-outline">Log out</button>
-            </form>
-            {% else %}
-                <a href="{% url 'login' %}" class="btn btn-outline">Log in</a>
-                <a href="{% url 'signup' %}" class="btn btn-primary">Sign up</a>
-            {% endif %}
-        </div>
-    </header>
+        </header>
+    </div>
 
     <main>
         {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li class="message {{ message.tags }}">{{ message }}</li>
-            {% endfor %}
-        </ul>
+            <div class="messages" role="status">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">
+                        <span>{{ message }}</span>
+                        <button type="button" class="message-close"
+                                aria-label="Dismiss message"
+                                onclick="this.parentElement.remove()">&times;</button>
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
-
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 
     <footer class="footer">
@@ -58,15 +86,12 @@
             <strong>🌱 MindBloom</strong>
             <span>Minds grow here.</span>
         </div>
-
         <p>Small steps. Brighter tomorrows.</p>
-
         <div class="footer-links">
             <a href="{% url 'privacy' %}">Privacy</a>
             <a href="{% url 'terms' %}">Terms</a>
             <a href="{% url 'contact' %}">Contact</a>
         </div>
     </footer>
-
 </body>
 </html>
