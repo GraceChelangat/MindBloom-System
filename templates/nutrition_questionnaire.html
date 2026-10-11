@@ -51,6 +51,39 @@ Nutrition & Lifestyle Questionnaire | MindBloom
         <form method="post" class="nutrition-form">
 
             {% csrf_token %}
+            
+<!-- QUESTIONNAIRE PROGRESS -->
+<div class="nutrition-progress">
+
+    <div class="nutrition-progress-header">
+        <span>Your questionnaire progress</span>
+
+        <span id="nutrition-progress-text">
+            0 of 7 sections
+        </span>
+    </div>
+
+    <div
+        class="nutrition-progress-track"
+        role="progressbar"
+        aria-label="Questionnaire sections completed"
+        aria-valuemin="0"
+        aria-valuemax="7"
+        aria-valuenow="0"
+        id="nutrition-progress-bar"
+    >
+        <div
+            class="nutrition-progress-fill"
+            id="nutrition-progress-fill"
+        ></div>
+    </div>
+
+    <p class="nutrition-progress-hint">
+        Take your time. Your wellbeing journey is personal.
+    </p>
+
+</div>
+
 
             {% if form.non_field_errors %}
                 <div class="nutrition-alert" role="alert">

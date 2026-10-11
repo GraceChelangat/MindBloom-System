@@ -250,3 +250,73 @@ def daily_checkin(request):
         'checkin.html',
         {'form': form}
     )
+
+# ==========================================================
+# MINDBLOOM EXPLORATORY ML API
+# ==========================================================
+
+import json
+import math
+
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
+from core.ml.stress_prediction_service import predict_stress
+
+
+@login_required
+@require_POST
+def exploratory_stress_prediction(request):
+    """
+    Accept six emotional measurements and return
+    an exploratory stress-related prediction.
+
+    This endpoint is not a clinical relapse-risk API.
+    """
+
+    # Restrict the size of the incoming request.
+    if len(request.body) > 4096:
+        return JsonResponse(
+            {"error": "Request body is too large."},
+            status=413
+        )
+
+    # Decode the JSON request body.
+    try:
+        data = json.loads(request.body)
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return JsonResponse(
+            {"error": "Invalid JSON request body."},
+            status=400
+        )
+
+    # Require a JSON object containing measurements.
+    if not isinstance(data, dict):
+        return JsonResponse(
+            {"error": "Expected a JSON object."},
+            status=400
+        )
+
+    try:
+        # Existing service validates required features,
+        # numerical values and the provisional input range.
+        prediction = predict_stress(data)
+
+    except (ValueError, TypeError) as error:
+        return JsonResponse(
+            {"error": str(error)},
+            status=400
+        )
+
+    # Return the exploratory result.
+    return JsonResponse({
+        "prediction": round(prediction, 2),
+        "target": "E_nervous_stressed",
+        "model": "Ridge Regression",
+        "clinical_relapse_prediction": False,
+        "disclaimer": (
+            "Exploratory stress-related estimate only. "
+            "Not a clinical relapse-risk assessment."
+        )
+    })

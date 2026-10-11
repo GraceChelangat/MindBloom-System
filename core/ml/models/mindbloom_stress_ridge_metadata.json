@@ -1,0 +1,17 @@
+{
+    "model_name": "MindBloom Exploratory Stress Ridge",
+    "model_type": "Ridge Regression",
+    "target": "E_nervous_stressed",
+    "features": [
+        "E_cheerful",
+        "E_enthusiastic",
+        "E_relaxed",
+        "E_calm",
+        "E_irritated",
+        "E_depressed"
+    ],
+    "participant_id": "ID",
+    "purpose": "Exploratory stress-related prediction",
+    "clinical_relapse_model": false,
+    "sklearn_version": "1.9.1"
+}

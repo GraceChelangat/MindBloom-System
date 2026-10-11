@@ -36,4 +36,9 @@ urlpatterns = [
         views.forgot_password,
         name='forgot_password'
     ),
+    path(
+    "api/exploratory-stress/",
+    views.exploratory_stress_prediction,
+    name="exploratory_stress_prediction"
+),
 ]
