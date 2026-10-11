@@ -3085,3 +3085,219 @@ p:last-of-type {
         gap: 14px;
     }
 }
+
+/* Check-In History Pagination */
+
+.history-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 36px;
+}
+
+.pagination-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 20px;
+    border: 1px solid #dce8d8;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #416b57;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.pagination-button:hover {
+    background: #416b57;
+    color: #ffffff;
+}
+
+.pagination-button.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pagination-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 8px;
+    border: 1px solid #dce8d8;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #416b57;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.pagination-number:hover,
+.pagination-number.active {
+    background: #416b57;
+    border-color: #416b57;
+    color: #ffffff;
+}
+
+@media (max-width: 600px) {
+    .history-pagination {
+        gap: 10px;
+    }
+
+    .pagination-button {
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+
+    .pagination-number {
+        min-width: 35px;
+        height: 35px;
+    }
+}
+
+/* Check-In History Date Filter */
+
+.history-filter-card {
+    background: #ffffff;
+    border: 1px solid #e8e1d7;
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 28px;
+}
+
+.history-filter-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.history-filter-heading h2 {
+    font-family: Georgia, serif;
+    font-size: 27px;
+    color: #294d3d;
+    margin: 5px 0 10px;
+}
+
+.history-filter-heading p:not(.history-eyebrow) {
+    color: #718078;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.history-filter-icon {
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #e4efe1;
+    font-size: 24px;
+}
+
+.history-filter-form {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.history-filter-field {
+    display: flex;
+    flex: 1 1 190px;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.history-filter-field label {
+    color: #294d3d;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.history-filter-field input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    border: 1px solid #dce8d8;
+    border-radius: 12px;
+    background: #fffdfa;
+    color: #294d3d;
+    font: inherit;
+}
+
+.history-filter-field input:focus {
+    outline: 2px solid #9fbea5;
+    outline-offset: 2px;
+}
+
+.history-filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.history-filter-button {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 30px;
+    background: #416b57;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.history-filter-button:hover {
+    background: #294d3d;
+}
+
+.history-clear-button {
+    padding: 12px 18px;
+    border: 1px solid #dce8d8;
+    border-radius: 30px;
+    color: #416b57;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.history-clear-button:hover {
+    background: #e4efe1;
+}
+
+@media (max-width: 600px) {
+    .history-filter-card {
+        padding: 22px;
+    }
+
+    .history-filter-field,
+    .history-filter-actions,
+    .history-filter-button {
+        width: 100%;
+    }
+
+    .history-filter-actions {
+        align-items: stretch;
+    }
+
+    .history-clear-button {
+        text-align: center;
+    }
+}

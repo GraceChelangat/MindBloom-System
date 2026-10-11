@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 from .models import TeenagerYoungAdult, DailyCheckIn
 from .forms import DailyCheckInForm, NutritionLifestyleQuestionnaireForm
@@ -133,19 +134,55 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 
+
+
 @login_required(login_url='login')
 def checkin_history(request):
     checkins = DailyCheckIn.objects.filter(
         user=request.user
     ).order_by('-created_at')
 
+    # Read optional date filters from the URL
+    from_date = request.GET.get('from_date', '')
+    to_date = request.GET.get('to_date', '')
+
+    # Validate the dates before filtering
+    from django.utils.dateparse import parse_date
+
+    valid_from_date = parse_date(from_date) if from_date else None
+    valid_to_date = parse_date(to_date) if to_date else None
+
+    if valid_from_date:
+        checkins = checkins.filter(
+            created_at__date__gte=valid_from_date
+        )
+
+    if valid_to_date:
+        checkins = checkins.filter(
+            created_at__date__lte=valid_to_date
+        )
+
+    # Count matching check-ins
+    total_checkins = checkins.count()
+
+    # Display 6 records per page
+    paginator = Paginator(checkins, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'checkins': checkins,
-        'total_checkins': checkins.count(),
+        'checkins': page_obj,
+        'page_obj': page_obj,
+        'total_checkins': total_checkins,
+        'from_date': from_date,
+        'to_date': to_date,
     }
 
-    return render(request, 'checkin_history.html', context)
-
+    return render(
+        request,
+        'checkin_history.html',
+        context
+    )
 
 
 @login_required(login_url='login')
