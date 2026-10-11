@@ -1,0 +1,565 @@
+
+/* ============================================
+   MINDBLOOM NUTRITION QUESTIONNAIRE
+   Dedicated stylesheet: nutrition.css
+   ============================================ */
+
+/* PAGE */
+
+.nutrition-page {
+    --nutrition-primary: #476b55;
+    --nutrition-primary-dark: #2d4c3a;
+    --nutrition-sage: #e8f1e6;
+    --nutrition-border: #dce7db;
+    --nutrition-text: #34483a;
+    --nutrition-muted: #718073;
+
+    width: 100%;
+    min-height: 100vh;
+    padding: 45px 20px 90px;
+    background: #faf9f5;
+    color: var(--nutrition-text);
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.nutrition-page *,
+.nutrition-page *::before,
+.nutrition-page *::after {
+    box-sizing: border-box;
+}
+
+.nutrition-container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* BACK BUTTON */
+
+.nutrition-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    color: var(--nutrition-primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.nutrition-back:hover {
+    color: var(--nutrition-primary-dark);
+    transform: translateX(-4px);
+}
+
+.nutrition-back span {
+    font-size: 20px;
+}
+
+/* HERO SECTION */
+
+.nutrition-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 58px 45px;
+    margin-bottom: 32px;
+    text-align: center;
+    background: linear-gradient(
+        135deg,
+        #e7f1e5 0%,
+        #f1f5e9 48%,
+        #faf4e9 100%
+    );
+    border: 1px solid #dce8d9;
+    border-radius: 30px;
+}
+
+.nutrition-hero-decoration {
+    position: absolute;
+    top: -48px;
+    right: 20px;
+    font-size: 190px;
+    line-height: 1;
+    color: rgba(76, 125, 86, 0.09);
+    pointer-events: none;
+    user-select: none;
+}
+
+.nutrition-eyebrow {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 18px;
+    color: #6b9274;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2.4px;
+}
+
+.nutrition-hero h1 {
+    position: relative;
+    max-width: 750px;
+    margin: 0 auto 20px;
+    color: #2c4b39;
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 750;
+    line-height: 1.18;
+    letter-spacing: -1.2px;
+}
+
+.nutrition-description {
+    position: relative;
+    max-width: 620px;
+    margin: 0 auto;
+    color: #697b6d;
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.nutrition-hero-tags {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.nutrition-hero-tags span {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 17px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #dce8d9;
+    border-radius: 30px;
+    color: #58755e;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* FORM LAYOUT */
+
+.nutrition-form {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+/* SECTION CARDS */
+
+.nutrition-card {
+    width: 100%;
+    padding: 40px 44px;
+    background: #ffffff;
+    border: 1px solid var(--nutrition-border);
+    border-radius: 26px;
+    box-shadow: 0 8px 30px rgba(42, 75, 53, 0.045);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.nutrition-card:hover {
+    border-color: #bcd3bf;
+    box-shadow: 0 12px 35px rgba(42, 75, 53, 0.065);
+}
+
+/* SECTION HEADERS */
+
+.nutrition-card-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #edf1eb;
+}
+
+.nutrition-section-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    background: #e8f2e6;
+    color: var(--nutrition-primary);
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.nutrition-section-eyebrow {
+    margin: 0 0 7px;
+    color: #82a08a;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.nutrition-card h2 {
+    margin: 0;
+    color: #2d4c3a;
+    font-size: 22px;
+    font-weight: 750;
+    line-height: 1.4;
+}
+
+.nutrition-section-description {
+    margin: -5px 0 28px;
+    color: var(--nutrition-muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* QUESTION FIELDS */
+
+.nutrition-field {
+    margin-bottom: 34px;
+}
+
+.nutrition-field:last-child {
+    margin-bottom: 0;
+}
+
+.nutrition-question {
+    display: block;
+    margin: 0 0 14px;
+    color: #344d3d;
+    font-size: 15px;
+    font-weight: 650;
+    line-height: 1.65;
+}
+
+.nutrition-hint {
+    margin: -7px 0 15px;
+    color: #87948a;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.nutrition-sublabel {
+    display: block;
+    margin: 20px 0 10px;
+    color: #5f7765;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* RADIO AND CHECKBOX GROUPS */
+
+/*
+   Django RadioSelect and CheckboxSelectMultiple
+   typically render an outer div containing
+   individual divs with labels and inputs.
+*/
+
+.nutrition-options > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.nutrition-options > div > div {
+    min-width: 0;
+}
+
+/* Supports Django's div-based choice rendering */
+
+.nutrition-options label {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    width: 100%;
+    min-height: 52px;
+    padding: 15px 17px;
+    margin: 0;
+    background: #f8faf7;
+    border: 1px solid #e1eae0;
+    border-radius: 14px;
+    color: #465b4b;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.nutrition-options label:hover {
+    background: #f0f6ee;
+    border-color: #b6d0b9;
+}
+
+.nutrition-options label:has(input:checked) {
+    background: #e8f3e6;
+    border-color: #83ad8b;
+    box-shadow: 0 0 0 1px rgba(131, 173, 139, 0.1);
+}
+
+.nutrition-options label:has(input:focus-visible) {
+    outline: 2px solid #476b55;
+    outline-offset: 3px;
+}
+
+/* Radio buttons and checkboxes */
+
+.nutrition-options input[type="radio"],
+.nutrition-options input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 1px 0 0;
+    flex-shrink: 0;
+    accent-color: var(--nutrition-primary);
+    cursor: pointer;
+}
+
+/* TEXT AND NUMBER INPUTS */
+
+.nutrition-field input[type="text"],
+.nutrition-field input[type="number"] {
+    display: block;
+    width: 100%;
+    max-width: 470px;
+    min-height: 49px;
+    padding: 14px 17px;
+    border: 1px solid #d8e5d7;
+    border-radius: 13px;
+    background: #fbfcfa;
+    color: #304538;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.nutrition-field input[type="text"]:hover,
+.nutrition-field input[type="number"]:hover {
+    border-color: #aac7b0;
+}
+
+.nutrition-field input[type="text"]:focus,
+.nutrition-field input[type="number"]:focus {
+    outline: none;
+    border-color: #7da88a;
+    box-shadow: 0 0 0 4px rgba(125, 168, 138, 0.13);
+}
+
+/* FORM ERRORS */
+
+.nutrition-form .errorlist {
+    list-style: none;
+    margin: 12px 0;
+    padding: 12px 15px;
+    background: #fff1ef;
+    border: 1px solid #f0d1cb;
+    border-radius: 11px;
+    color: #a33c3c;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.nutrition-alert {
+    padding: 16px 20px;
+    background: #fff1ef;
+    border: 1px solid #f0d1cb;
+    border-radius: 14px;
+    color: #a33c3c;
+}
+
+/* FORM FOOTER */
+
+.nutrition-form-footer {
+    padding: 30px 20px 20px;
+    text-align: center;
+}
+
+.nutrition-footer-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.nutrition-footer-message span {
+    font-size: 26px;
+}
+
+.nutrition-footer-message p {
+    margin: 0;
+    color: #6b806f;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* SUBMIT BUTTON */
+
+.nutrition-submit-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 390px;
+    padding: 18px 28px;
+    border: none;
+    border-radius: 50px;
+    background: var(--nutrition-primary);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(71, 107, 85, 0.18);
+    transition:
+        background 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.nutrition-submit-btn:hover {
+    background: var(--nutrition-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(71, 107, 85, 0.23);
+}
+
+.nutrition-submit-btn:focus-visible {
+    outline: 3px solid #83ad8b;
+    outline-offset: 4px;
+}
+
+.nutrition-submit-btn span {
+    font-size: 19px;
+}
+
+.nutrition-footer-note {
+    margin: 17px 0 0;
+    color: #8b988d;
+    font-size: 12px;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+    .nutrition-card {
+        padding: 32px;
+    }
+
+    .nutrition-hero {
+        padding: 48px 30px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+    .nutrition-page {
+        padding: 25px 14px 65px;
+    }
+
+    .nutrition-back {
+        margin-bottom: 22px;
+    }
+
+    .nutrition-hero {
+        padding: 40px 22px;
+        margin-bottom: 25px;
+        border-radius: 22px;
+    }
+
+    .nutrition-hero-decoration {
+        font-size: 130px;
+        top: -20px;
+        right: -10px;
+    }
+
+    .nutrition-hero h1 {
+        font-size: 30px;
+    }
+
+    .nutrition-description {
+        font-size: 14px;
+    }
+
+    .nutrition-hero-tags {
+        gap: 8px;
+    }
+
+    .nutrition-hero-tags span {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+
+    .nutrition-form {
+        gap: 18px;
+    }
+
+    .nutrition-card {
+        padding: 26px 20px;
+        border-radius: 20px;
+    }
+
+    .nutrition-card-header {
+        gap: 13px;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+    }
+
+    .nutrition-section-number {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        font-size: 15px;
+    }
+
+    .nutrition-section-eyebrow {
+        font-size: 9px;
+        letter-spacing: 1.4px;
+    }
+
+    .nutrition-card h2 {
+        font-size: 18px;
+    }
+
+    .nutrition-question {
+        font-size: 14px;
+    }
+
+    .nutrition-options > div {
+        grid-template-columns: 1fr;
+    }
+
+    .nutrition-options label {
+        min-height: 48px;
+        padding: 13px 14px;
+    }
+
+    .nutrition-field {
+        margin-bottom: 27px;
+    }
+
+    .nutrition-form-footer {
+        padding: 25px 5px;
+    }
+
+    .nutrition-footer-message {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .nutrition-submit-btn {
+        max-width: 100%;
+    }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+    .nutrition-page *,
+    .nutrition-page *::before,
+    .nutrition-page *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
