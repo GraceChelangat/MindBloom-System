@@ -320,3 +320,25 @@ def exploratory_stress_prediction(request):
             "Not a clinical relapse-risk assessment."
         )
     })
+
+# ==========================================================
+# MINDBLOOM - EXPLORATORY ML DEMONSTRATION PAGE
+# ==========================================================
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+
+@login_required
+def ml_demo(request):
+    """
+    Display the exploratory ML demonstration page.
+
+    The page collects six emotional measurements
+    and submits them to the existing Django ML API.
+
+    The actual prediction is performed by the
+    exploratory_stress_prediction API view.
+    """
+
+    return render(request, "ml_demo.html")

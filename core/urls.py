@@ -41,4 +41,12 @@ urlpatterns = [
     views.exploratory_stress_prediction,
     name="exploratory_stress_prediction"
 ),
+
+# Exploratory machine-learning demonstration page
+path(
+    "ml-demo/",
+    views.ml_demo,
+    name="ml_demo"
+),
+
 ]

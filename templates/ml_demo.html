@@ -1,0 +1,313 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .ml-demo {
+        max-width: 850px;
+        margin: 45px auto;
+        padding: 20px;
+        font-family: inherit;
+    }
+
+    .ml-heading {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .ml-heading h1 {
+        color: #496b55;
+        font-size: 2rem;
+        margin-bottom: 12px;
+    }
+
+    .ml-heading p {
+        color: #66756a;
+        line-height: 1.7;
+    }
+
+    .ml-card {
+        background: #ffffff;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 8px 28px rgba(60, 90, 65, 0.10);
+        border: 1px solid #e4ebe3;
+    }
+
+    .ml-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+    }
+
+    .ml-field label {
+        display: block;
+        font-weight: 600;
+        color: #465d4b;
+        margin-bottom: 8px;
+    }
+
+    .ml-field input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #cbd9cc;
+        border-radius: 10px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    .ml-field input:focus {
+        outline: none;
+        border-color: #7ca78a;
+        box-shadow: 0 0 0 3px rgba(124, 167, 138, 0.15);
+    }
+
+    .ml-submit {
+        width: 100%;
+        background: #6e9578;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 15px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 28px;
+    }
+
+    .ml-submit:hover {
+        background: #567b61;
+    }
+
+    .ml-submit:disabled {
+        opacity: 0.65;
+        cursor: wait;
+    }
+
+    .ml-result {
+        display: none;
+        margin-top: 25px;
+        padding: 25px;
+        border-radius: 14px;
+        background: #f0f6f0;
+        text-align: center;
+    }
+
+    .ml-result h2 {
+        color: #496b55;
+        margin-bottom: 12px;
+    }
+
+    .ml-score {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #426b50;
+    }
+
+    .ml-warning {
+        background: #faf5e9;
+        border-left: 4px solid #c5a66b;
+        padding: 15px;
+        border-radius: 8px;
+        color: #756346;
+        margin-top: 25px;
+        line-height: 1.6;
+    }
+
+    .ml-error {
+        color: #9c3434;
+        margin-top: 16px;
+        display: none;
+    }
+
+    @media (max-width: 600px) {
+        .ml-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .ml-card {
+            padding: 22px;
+        }
+    }
+</style>
+
+<div class="ml-demo">
+
+    <div class="ml-heading">
+        <h1>🌱 Emotional Insights Lab</h1>
+
+        <p>
+            Explore how MindBloom's trained Ridge Regression
+            model processes emotional measurements.
+        </p>
+    </div>
+
+    <div class="ml-card">
+
+        <form id="mlPredictionForm">
+            {% csrf_token %}
+
+            <div class="ml-grid">
+
+                <div class="ml-field">
+                    <label for="E_cheerful">Cheerful</label>
+                    <input type="number" id="E_cheerful"
+                           min="0" max="100" step="any"
+                           value="60" required>
+                </div>
+
+                <div class="ml-field">
+                    <label for="E_enthusiastic">Enthusiastic</label>
+                    <input type="number" id="E_enthusiastic"
+                           min="0" max="100" step="any"
+                           value="55" required>
+                </div>
+
+                <div class="ml-field">
+                    <label for="E_relaxed">Relaxed</label>
+                    <input type="number" id="E_relaxed"
+                           min="0" max="100" step="any"
+                           value="70" required>
+                </div>
+
+                <div class="ml-field">
+                    <label for="E_calm">Calm</label>
+                    <input type="number" id="E_calm"
+                           min="0" max="100" step="any"
+                           value="65" required>
+                </div>
+
+                <div class="ml-field">
+                    <label for="E_irritated">Irritated</label>
+                    <input type="number" id="E_irritated"
+                           min="0" max="100" step="any"
+                           value="20" required>
+                </div>
+
+                <div class="ml-field">
+                    <label for="E_depressed">Depressed</label>
+                    <input type="number" id="E_depressed"
+                           min="0" max="100" step="any"
+                           value="15" required>
+                </div>
+
+            </div>
+
+            <button type="submit"
+                    class="ml-submit"
+                    id="mlSubmitButton">
+                Generate Exploratory Prediction
+            </button>
+        </form>
+
+        <p class="ml-error" id="mlError" role="alert"></p>
+
+        <div class="ml-result"
+             id="mlResult"
+             aria-live="polite">
+
+            <h2>Exploratory Model Output</h2>
+
+            <div class="ml-score" id="mlScore"></div>
+
+            <p>
+                Estimated value of the EMA variable
+                <strong>E_nervous_stressed</strong>.
+            </p>
+
+            <p id="mlDisclaimer"></p>
+        </div>
+
+        <div class="ml-warning">
+            <strong>Research demonstration only.</strong>
+            This prediction is not a diagnosis,
+            future stress forecast, or clinical
+            anorexia nervosa relapse-risk assessment.
+            The 0–100 input range is provisional
+            pending confirmation of the original
+            EMA instrument's measurement scale.
+        </div>
+
+    </div>
+</div>
+
+<script>
+document.getElementById("mlPredictionForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const button = document.getElementById("mlSubmitButton");
+        const errorBox = document.getElementById("mlError");
+        const resultBox = document.getElementById("mlResult");
+
+        errorBox.style.display = "none";
+        resultBox.style.display = "none";
+
+        const featureNames = [
+            "E_cheerful",
+            "E_enthusiastic",
+            "E_relaxed",
+            "E_calm",
+            "E_irritated",
+            "E_depressed"
+        ];
+
+        const payload = {};
+
+        featureNames.forEach(function(name) {
+            payload[name] = Number(
+                document.getElementById(name).value
+            );
+        });
+
+        button.disabled = true;
+        button.textContent = "Generating prediction...";
+
+        try {
+            const response = await fetch(
+                "{% url 'exploratory_stress_prediction' %}",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": document.querySelector(
+                            "[name=csrfmiddlewaretoken]"
+                        ).value
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify(payload)
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.error || "Prediction request failed."
+                );
+            }
+
+            document.getElementById("mlScore")
+                .textContent = data.prediction;
+
+            document.getElementById("mlDisclaimer")
+                .textContent = data.disclaimer;
+
+            resultBox.style.display = "block";
+
+        } catch (error) {
+            errorBox.textContent = error.message;
+            errorBox.style.display = "block";
+
+        } finally {
+            button.disabled = false;
+            button.textContent =
+                "Generate Exploratory Prediction";
+        }
+    });
+</script>
+
+{% endblock %}

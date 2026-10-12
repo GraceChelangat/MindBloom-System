@@ -147,6 +147,33 @@ class AuthenticationTests(TestCase):
 
         self.assertFalse(login_successful)
 
+    def test_invalid_credentials_show_one_login_error(self):
+        invalid_credentials = [
+            {"username": "auth_test_user", "password": "WrongPassword123!"},
+            {"username": "unknown_user", "password": "TestPassword123!"},
+        ]
+
+        for credentials in invalid_credentials:
+            with self.subTest(username=credentials["username"]):
+                response = self.client.post(reverse("login"), credentials)
+
+                self.assertContains(
+                    response,
+                    "Invalid username or password. Please try again.",
+                    count=1,
+                )
+                self.assertContains(response, 'class="auth-message error" role="alert"')
+                self.assertNotIn("_auth_user_id", self.client.session)
+
+    def test_login_form_redirects_with_valid_credentials(self):
+        response = self.client.post(
+            reverse("login"),
+            {"username": "auth_test_user", "password": "TestPassword123!"},
+        )
+
+        self.assertRedirects(response, reverse("dashboard"))
+        self.assertEqual(int(self.client.session["_auth_user_id"]), self.user.pk)
+
     def test_dashboard_requires_login(self):
         response = self.client.get(
             reverse("dashboard")

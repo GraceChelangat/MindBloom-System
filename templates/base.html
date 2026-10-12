@@ -67,6 +67,7 @@
     </div>
 
     <main>
+        {% block messages %}
         {% if messages %}
             <div class="messages" role="status">
                 {% for message in messages %}
@@ -79,6 +80,7 @@
                 {% endfor %}
             </div>
         {% endif %}
+        {% endblock %}
         {% block content %}{% endblock %}
     </main>
 
