@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.core.paginator import Paginator
 
@@ -25,6 +27,22 @@ def signup(request):
         date_of_birth = request.POST.get('date_of_birth')
         gender = request.POST.get('gender')
         contact_number = request.POST.get('contact_number')
+
+        try:
+            username = User._meta.get_field('username').clean(username, None)
+        except ValidationError as error:
+            for message in error.messages:
+                messages.error(request, f'Username: {message}')
+            return redirect('signup')
+
+        try:
+            if not password:
+                raise ValidationError('Please enter a password.')
+            validate_password(password, User(username=username, email=email))
+        except ValidationError as error:
+            for message in error.messages:
+                messages.error(request, f'Password: {message}')
+            return redirect('signup')
 
         if password != confirm_password:
             messages.error(request, 'Passwords do not match.')

@@ -122,6 +122,84 @@ class NutritionQuestionnaireTests(TestCase):
         )
 
 
+class SignupValidationTests(TestCase):
+
+    def setUp(self):
+        self.signup_data = {
+            "full_name": "Test Person",
+            "username": "new_user",
+            "email": "new@example.com",
+            "password": "BloomGarden47!",
+            "confirm_password": "BloomGarden47!",
+            "date_of_birth": "2005-01-01",
+            "gender": "",
+            "contact_number": "",
+        }
+
+    def test_invalid_usernames_show_errors_without_creating_accounts(self):
+        for username in ["", "invalid username", "new/user", "a" * 151]:
+            with self.subTest(username=username):
+                response = self.client.post(
+                    reverse("signup"),
+                    {**self.signup_data, "username": username},
+                    follow=True,
+                )
+
+                self.assertContains(response, "Username:", count=1)
+                self.assertContains(response, 'class="auth-message error" role="alert"')
+                self.assertFalse(User.objects.exists())
+
+    def test_invalid_passwords_show_requirement_errors(self):
+        invalid_passwords = [
+            ("", "Please enter a password."),
+            ("Ab3!", "This password is too short."),
+            ("password", "This password is too common."),
+            ("9182736450", "This password is entirely numeric."),
+            ("new_user", "The password is too similar to the username."),
+        ]
+
+        for password, expected_error in invalid_passwords:
+            with self.subTest(password=password):
+                response = self.client.post(
+                    reverse("signup"),
+                    {
+                        **self.signup_data,
+                        "password": password,
+                        "confirm_password": password,
+                    },
+                    follow=True,
+                )
+
+                self.assertContains(response, expected_error, count=1)
+                self.assertFalse(User.objects.exists())
+
+    def test_mismatched_passwords_show_one_error(self):
+        response = self.client.post(
+            reverse("signup"),
+            {**self.signup_data, "confirm_password": "DifferentPassword47!"},
+            follow=True,
+        )
+
+        self.assertContains(response, "Passwords do not match.", count=1)
+        self.assertFalse(User.objects.exists())
+
+    def test_duplicate_username_shows_one_error(self):
+        User.objects.create_user(username="new_user", password="BloomGarden47!")
+
+        response = self.client.post(reverse("signup"), self.signup_data, follow=True)
+
+        self.assertContains(response, "That username is already in use.", count=1)
+        self.assertEqual(User.objects.count(), 1)
+
+    def test_valid_signup_creates_account_and_profile(self):
+        response = self.client.post(reverse("signup"), self.signup_data)
+
+        self.assertRedirects(response, reverse("login"))
+        user = User.objects.get(username="new_user")
+        self.assertTrue(user.check_password(self.signup_data["password"]))
+        self.assertEqual(user.teenager_profile.name, "Test Person")
+
+
 class AuthenticationTests(TestCase):
 
     def setUp(self):

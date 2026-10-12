@@ -2,6 +2,8 @@
 
 {% block title %}Sign Up | MindBloom{% endblock %}
 
+{% block messages %}{% endblock %}
+
 {% block content %}
 
 <section class="auth-section">
@@ -44,7 +46,7 @@
             {% if messages %}
                 <div class="auth-messages">
                     {% for message in messages %}
-                        <div class="auth-message {{ message.tags }}">
+                        <div class="auth-message {{ message.tags }}" role="{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert{% else %}status{% endif %}">
                             {{ message }}
                         </div>
                     {% endfor %}
