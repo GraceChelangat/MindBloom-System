@@ -13,9 +13,32 @@ class TeenagerYoungAdult(models.Model):
     date_of_birth = models.DateField()
     gender = models.CharField(max_length=30, blank=True)
     contact_number = models.CharField(max_length=20, blank=True)
+    clinician_email = models.EmailField(blank=True, default="")
+
+    assigned_clinician = models.ForeignKey(
+        "ClinicianProfile",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="assigned_users"
+    )
 
     def __str__(self):
         return self.name
+
+class ClinicianProfile(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="clinician_profile"
+    )
+
+    full_name = models.CharField(max_length=150)
+    email = models.EmailField(unique=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.full_name
 
 
 class NutritionLifestyleQuestionnaire(models.Model):
@@ -249,3 +272,95 @@ class DailyCheckIn(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.created_at.date()}"    
+
+
+class MindBloomAlert(models.Model):
+
+    ALERT_TYPES = [
+        ("high_stress", "Repeated High Stress"),
+        ("low_mood", "Repeated Low Mood"),
+        ("sleep_concern", "Sleep Concern"),
+        ("eating_difficulty", "Eating Difficulty"),
+        ("multiple_concerns", "Multiple Check-in Concerns"),
+    ]
+
+    user = models.ForeignKey(
+        "auth.User",
+        on_delete=models.CASCADE,
+        related_name="mindbloom_alerts"
+    )
+
+    alert_type = models.CharField(
+        max_length=30,
+        choices=ALERT_TYPES
+    )
+
+    title = models.CharField(
+        max_length=150
+    )
+
+    message = models.TextField()
+
+    is_read = models.BooleanField(
+        default=False
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.title} - {self.user.username}"
+
+class ClinicianEscalation(models.Model):
+    REASON_CHOICES = [
+        ("high_risk", "High Risk"),
+        ("worsening_condition", "Worsening Condition"),
+    ]
+
+    STATUS_CHOICES = [
+        ("pending", "Pending"),
+        ("sent", "Email Sent"),
+        ("failed", "Email Failed"),
+        ("acknowledged", "Acknowledged"),
+    ]
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="clinician_escalations"
+    )
+
+    clinician = models.ForeignKey(
+        ClinicianProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="escalations"
+    )
+
+    reason = models.CharField(
+        max_length=30,
+        choices=REASON_CHOICES
+    )
+
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="pending"
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    email_sent_at = models.DateTimeField(null=True, blank=True)
+    acknowledged_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.get_reason_display()} - {self.user.username}"

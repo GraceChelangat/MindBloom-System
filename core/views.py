@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.core.paginator import Paginator
+from .clinician_alert_service import process_user_escalations
 
 from .models import TeenagerYoungAdult, DailyCheckIn
 from .forms import DailyCheckInForm, NutritionLifestyleQuestionnaireForm
@@ -19,65 +20,125 @@ def home(request):
 
 def signup(request):
     if request.method == 'POST':
-        full_name = request.POST.get('full_name')
-        username = request.POST.get('username')
-        email = request.POST.get('email')
+        # Get form data
+        full_name = request.POST.get('full_name', '').strip()
+        username = request.POST.get('username', '').strip()
+        email = request.POST.get('email', '').strip()
+        clinician_email = request.POST.get('clinician_email', '').strip()
+        clinician_consent = request.POST.get('clinician_consent')
+        terms = request.POST.get('terms')
+
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
         date_of_birth = request.POST.get('date_of_birth')
-        gender = request.POST.get('gender')
-        contact_number = request.POST.get('contact_number')
+        gender = request.POST.get('gender', '')
+        contact_number = request.POST.get('contact_number', '').strip()
 
+        # Validate required fields
+        if not all([
+            full_name, username, email, password,
+            confirm_password, date_of_birth, clinician_email
+        ]):
+            messages.error(request, 'Please fill in all required fields.')
+            return redirect('signup')
+
+        # Validate clinician email
         try:
-            username = User._meta.get_field('username').clean(username, None)
+            clinician_email = User._meta.get_field('email').clean(
+                clinician_email, None
+            )
+        except ValidationError:
+            messages.error(request, "Please enter a valid clinician email address.")
+            return redirect('signup')
+
+        # Validate consent
+        if not clinician_consent:
+            messages.error(
+                request,
+                'Please confirm that you understand the clinician email notifications.'
+            )
+            return redirect('signup')
+
+        # Validate terms and privacy policy
+        if terms != 'accepted':
+            messages.error(
+                request,
+                'Please accept the Terms of Use and Privacy Policy.'
+            )
+            return redirect('signup')
+
+        # Validate username
+        try:
+            username = User._meta.get_field('username').clean(
+                username, None
+            )
         except ValidationError as error:
             for message in error.messages:
                 messages.error(request, f'Username: {message}')
             return redirect('signup')
 
+        # Validate password
         try:
-            if not password:
-                raise ValidationError('Please enter a password.')
-            validate_password(password, User(username=username, email=email))
+            validate_password(
+                password,
+                User(username=username, email=email)
+            )
         except ValidationError as error:
             for message in error.messages:
                 messages.error(request, f'Password: {message}')
             return redirect('signup')
 
+        # Confirm passwords match
         if password != confirm_password:
             messages.error(request, 'Passwords do not match.')
             return redirect('signup')
 
+        # Check whether username already exists
         if User.objects.filter(username=username).exists():
             messages.error(request, 'That username is already in use.')
             return redirect('signup')
 
+        # Check whether user email already exists
         if User.objects.filter(email=email).exists():
-            messages.error(request, 'An account with that email already exists.')
+            messages.error(
+                request,
+                'An account with that email already exists.'
+            )
             return redirect('signup')
 
+        # Validate user's own email
+        try:
+            email = User._meta.get_field('email').clean(email, None)
+        except ValidationError:
+            messages.error(request, 'Please enter a valid email address.')
+            return redirect('signup')
+
+        # Create user account
         user = User.objects.create_user(
             username=username,
             email=email,
             password=password
         )
 
+        # Create teenager/young adult profile
         TeenagerYoungAdult.objects.create(
             user=user,
             name=full_name,
             date_of_birth=date_of_birth,
             gender=gender,
-            contact_number=contact_number
+            contact_number=contact_number,
+            clinician_email=clinician_email
         )
 
+        # Success message
         messages.success(
             request,
             'Account created successfully. You can now log in.'
         )
+
         return redirect('login')
 
     return render(request, 'signup.html')
-
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -254,6 +315,16 @@ def daily_checkin(request):
             checkin = form.save(commit=False)
             checkin.user = request.user
             checkin.save()
+
+            # Evaluate configured escalation rules after saving.
+            try:
+                process_user_escalations(request.user)
+            except Exception:
+                # Do not lose a saved check-in if alert processing fails.
+                import logging
+                logging.getLogger(__name__).exception(
+                    "MindBloom escalation processing failed."
+                )
 
             messages.success(
                 request,

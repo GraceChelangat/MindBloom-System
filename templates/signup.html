@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block title %}Sign Up | MindBloom{% endblock %}
@@ -27,10 +28,8 @@
         </div>
     </div>
 
-
     <!-- Sign up form -->
     <div class="auth-form-container">
-
         <div class="auth-form-wrapper">
 
             <p class="eyebrow">CREATE YOUR ACCOUNT</p>
@@ -41,25 +40,27 @@
                 Create your account to begin tracking your wellbeing.
             </p>
 
-
             <!-- Django messages -->
             {% if messages %}
                 <div class="auth-messages">
                     {% for message in messages %}
-                        <div class="auth-message {{ message.tags }}" role="{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert{% else %}status{% endif %}">
+                        <div
+                            class="auth-message {{ message.tags }}"
+                            role="{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert{% else %}status{% endif %}"
+                        >
                             {{ message }}
                         </div>
                     {% endfor %}
                 </div>
             {% endif %}
 
-
-            <form method="POST"
-                  action="{% url 'signup' %}"
-                  class="auth-form">
+            <form
+                method="POST"
+                action="{% url 'signup' %}"
+                class="auth-form"
+            >
 
                 {% csrf_token %}
-
 
                 <!-- Full name -->
                 <div class="form-group">
@@ -74,7 +75,6 @@
                     >
                 </div>
 
-
                 <!-- Username -->
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -88,7 +88,6 @@
                     >
                 </div>
 
-
                 <!-- Date of birth -->
                 <div class="form-group">
                     <label for="date_of_birth">Date of birth</label>
@@ -101,10 +100,9 @@
                     >
                 </div>
 
-
-                <!-- Email -->
+                <!-- User email -->
                 <div class="form-group">
-                    <label for="email">Email address</label>
+                    <label for="email">Your email address</label>
 
                     <input
                         type="email"
@@ -115,6 +113,26 @@
                     >
                 </div>
 
+                <!-- Clinician email -->
+                <div class="form-group">
+                    <label for="clinician_email">
+                        Clinician's email address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="clinician_email"
+                        name="clinician_email"
+                        placeholder="clinician@example.com"
+                        required
+                    >
+
+                    <small>
+                        MindBloom will use this address to send email
+                        notifications when configured escalation rules
+                        are triggered.
+                    </small>
+                </div>
 
                 <!-- Gender -->
                 <div class="form-group">
@@ -127,7 +145,6 @@
                         <option value="Other">Other</option>
                     </select>
                 </div>
-
 
                 <!-- Contact number -->
                 <div class="form-group">
@@ -144,7 +161,6 @@
                     >
                 </div>
 
-
                 <!-- Password -->
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -157,7 +173,6 @@
                         required
                     >
                 </div>
-
 
                 <!-- Confirm password -->
                 <div class="form-group">
@@ -174,12 +189,13 @@
                     >
                 </div>
 
-
-                <!-- Agreement -->
+                <!-- Terms and privacy agreement -->
                 <div class="form-check">
                     <input
                         type="checkbox"
                         id="terms"
+                        name="terms"
+                        value="accepted"
                         required
                     >
 
@@ -188,6 +204,21 @@
                     </label>
                 </div>
 
+                <!-- Clinician notification consent -->
+                <div class="form-check">
+                    <input
+                        type="checkbox"
+                        id="clinician_consent"
+                        name="clinician_consent"
+                        value="accepted"
+                        required
+                    >
+
+                    <label for="clinician_consent">
+                        I understand that MindBloom may send notifications
+                        to the clinician email address I have provided.
+                    </label>
+                </div>
 
                 <!-- Submit -->
                 <button
@@ -199,19 +230,19 @@
 
             </form>
 
-
+            <!-- Login link -->
             <p class="auth-switch">
                 Already have an account?
                 <a href="{% url 'login' %}">Log in</a>
             </p>
 
+            <!-- Disclaimer -->
             <p class="auth-disclaimer">
                 MindBloom is a support and monitoring tool and does not
                 replace professional medical advice, diagnosis or treatment.
             </p>
 
         </div>
-
     </div>
 
 </section>
