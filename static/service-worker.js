@@ -1,11 +1,11 @@
-
 const CACHE_NAME = "mindbloom-static-v1";
 
 const STATIC_ASSETS = [
     "/static/css/style.css",
     "/static/images/pwa-192.png",
     "/static/images/pwa-512.png",
-    "/static/manifest.json"
+    "/static/manifest.json",
+    "/offline/"
 ];
 
 // Install service worker and cache public static assets
