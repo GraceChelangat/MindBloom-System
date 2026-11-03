@@ -1,22 +1,24 @@
+
 from django.contrib import admin
 from django.urls import include, path
-from core import views
-from core import views
+from django.views.generic import TemplateView
+from django.views.static import serve
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Application URLs
     path('', include('core.urls')),
-    path('', views.home, name='home'),
-    path('signup/', views.signup, name='signup'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    path('dashboard/', views.dashboard, name='dashboard'),
-    path('nutrition-questionnaire/', views.nutrition_questionnaire, name='nutrition_questionnaire'),
-    path('resources/', views.resources, name='resources'),
-    path('privacy/', views.privacy, name='privacy'),
-    path('terms/', views.terms, name='terms'),
-    path('contact/', views.contact, name='contact'),
-    path('forgot-password/', views.forgot_password, name='forgot_password'),
-    path("daily-checkin/", views.daily_checkin, name="daily_checkin"),
-    path('checkin-history/', views.checkin_history, name='checkin_history'),
+
+    # PWA service worker served from the website root
+    path(
+        'service-worker.js',
+        serve,
+        {
+            'path': 'service-worker.js',
+            'document_root': settings.BASE_DIR / 'static',
+            'show_indexes': False,
+        },
+    ),
 ]

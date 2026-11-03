@@ -7,7 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}MindBloom{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
+    <!-- PWA Configuration -->
+<link rel="manifest" href="{% static 'manifest.json' %}">
+<meta name="theme-color" content="#6B8F71">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="MindBloom">
+<link rel="apple-touch-icon" href="{% static 'images/pwa-192.png' %}">
 </head>
 <body>
     <div class="site-header-wrap">
@@ -96,5 +102,29 @@
             <a href="{% url 'contact' %}">Contact</a>
         </div>
     </footer>
+
+
+<!-- MindBloom PWA Service Worker Registration -->
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", async () => {
+            try {
+                const registration = await navigator.serviceWorker.register(
+                    "/service-worker.js"
+                );
+
+                console.log(
+                    "MindBloom service worker registered:",
+                    registration.scope
+                );
+            } catch (error) {
+                console.error(
+                    "MindBloom service worker registration failed:",
+                    error
+                );
+            }
+        });
+    }
+</script>
 </body>
 </html>

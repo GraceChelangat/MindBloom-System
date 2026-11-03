@@ -1,0 +1,54 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6B8F71">
+
+    <title>You're Offline | MindBloom</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <main class="auth-section">
+        <div class="auth-form-container">
+            <div class="auth-form-wrapper">
+
+                <div class="auth-leaf">🌱</div>
+
+                <p class="eyebrow">MINDBLOOM</p>
+
+                <h1>You're currently <span>offline.</span></h1>
+
+                <p class="auth-subtitle">
+                    It looks like your internet connection is unavailable.
+                    Please reconnect to continue using MindBloom.
+                </p>
+
+                <p>
+                    Your wellbeing journey matters.
+                    Your private check-in information is not stored
+                    for offline access.
+                </p>
+
+                <button
+                    type="button"
+                    class="btn btn-primary auth-submit"
+                    onclick="window.location.reload()"
+                >
+                    Try again
+                </button>
+
+                <p class="auth-disclaimer">
+                    MindBloom is a support and monitoring tool and does
+                    not replace professional medical advice.
+                </p>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>

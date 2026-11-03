@@ -1,0 +1,27 @@
+
+{
+    "id": "/",
+    "name": "MindBloom",
+    "short_name": "MindBloom",
+    "description": "A gentle space to track your wellbeing and daily patterns.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#F8FAF7",
+    "theme_color": "#6B8F71",
+    "icons": [
+        {
+            "src": "/static/images/pwa-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/static/images/pwa-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}

@@ -49,4 +49,6 @@ path(
     name="ml_demo"
 ),
 
+path('offline/', views.offline, name='offline'),
+
 ]

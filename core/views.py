@@ -431,3 +431,5 @@ def ml_demo(request):
     """
 
     return render(request, "ml_demo.html")
+def offline(request):
+    return render(request, 'offline.html')
