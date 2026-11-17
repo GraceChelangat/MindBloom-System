@@ -10,45 +10,660 @@
     <title>You're Offline | MindBloom</title>
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f7f1;
+        }
+
+        .offline-container {
+            width: 100%;
+            max-width: 650px;
+            margin: auto;
+            padding: 2rem 1rem;
+        }
+
+        .offline-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 10px 35px rgba(41, 77, 61, 0.08);
+            text-align: center;
+        }
+
+        .offline-logo {
+            font-size: 2.5rem;
+            margin-bottom: .5rem;
+        }
+
+        .eyebrow {
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: #6b8f71;
+            font-size: .8rem;
+        }
+
+        .offline-card h1 {
+            color: #294d3d;
+            font-size: 2rem;
+            margin: .8rem 0;
+        }
+
+        .offline-card h1 span {
+            color: #6b8f71;
+        }
+
+        .offline-description {
+            color: #66736a;
+            line-height: 1.7;
+        }
+
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: #fff1e9;
+            color: #9a572c;
+            padding: .6rem 1rem;
+            border-radius: 30px;
+            font-size: .85rem;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #dc8050;
+        }
+
+        .breathe-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f4f7f0;
+            border-radius: 18px;
+        }
+
+        .breathe-circle {
+            width: 110px;
+            height: 110px;
+            margin: auto;
+            border-radius: 50%;
+            background: #dfead9;
+            border: 3px solid #6b8f71;
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        .breathe-label {
+            color: #294d3d;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+        }
+
+        .breathe-hint {
+            color: #78847a;
+            font-size: .85rem;
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.45);
+            }
+        }
+
+        .support-box {
+            text-align: left;
+            background: #faf7ef;
+            border: 1px solid #dfead9;
+            border-radius: 18px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .support-box h2 {
+            color: #294d3d;
+            font-size: 1.25rem;
+            margin-top: 0;
+        }
+
+        .support-intro {
+            color: #66736a;
+            font-size: .9rem;
+            line-height: 1.6;
+        }
+
+        .support-card {
+            background: #fff;
+            border: 1px solid #e5eadf;
+            border-radius: 12px;
+            padding: 1rem;
+            margin: .8rem 0;
+        }
+
+        .support-name {
+            color: #294d3d;
+            font-weight: 700;
+            margin-bottom: .3rem;
+        }
+
+        .support-description {
+            font-size: .82rem;
+            color: #778078;
+            margin-bottom: .8rem;
+        }
+
+        .support-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+
+        .support-link {
+            display: inline-block;
+            text-decoration: none;
+            color: #416b57;
+            border: 1px solid #a8c3a0;
+            border-radius: 20px;
+            padding: .45rem .8rem;
+            font-size: .82rem;
+            font-weight: 600;
+            transition: .2s ease;
+        }
+
+        .support-link:hover {
+            background: #416b57;
+            color: white;
+        }
+
+        .emergency-card {
+            border-left: 4px solid #c96b52;
+        }
+
+        .emergency-card .support-link {
+            border-color: #c96b52;
+            color: #a64d38;
+        }
+
+        .emergency-card .support-link:hover {
+            background: #a64d38;
+            color: white;
+        }
+
+        .support-note {
+            font-size: .8rem;
+            color: #78847a;
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+
+        .offline-info {
+            background: #f4f7f0;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+
+        .offline-info h3 {
+            color: #294d3d;
+            font-size: 1rem;
+            margin-top: 0;
+        }
+
+        .offline-info p {
+            color: #66736a;
+            font-size: .88rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .offline-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: .8rem;
+            margin-top: 1.5rem;
+        }
+
+        .retry-button,
+        .home-button {
+            display: block;
+            width: 100%;
+            padding: .9rem 1rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .retry-button {
+            border: none;
+            background: #416b57;
+            color: white;
+        }
+
+        .retry-button:hover {
+            background: #294d3d;
+        }
+
+        .retry-button:disabled {
+            opacity: .65;
+            cursor: wait;
+        }
+
+        .home-button {
+            border: 1px solid #a8c3a0;
+            color: #416b57;
+            background: white;
+        }
+
+        .retry-message {
+            font-size: .85rem;
+            color: #66736a;
+            min-height: 1.3rem;
+        }
+
+        .auth-disclaimer {
+            font-size: .8rem;
+            color: #89928a;
+            margin-top: 1.5rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 480px) {
+            .offline-card {
+                padding: 1.3rem;
+            }
+
+            .offline-card h1 {
+                font-size: 1.65rem;
+            }
+
+            .support-box {
+                padding: 1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .breathe-circle {
+                animation: none;
+            }
+
+            * {
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <main class="auth-section">
-        <div class="auth-form-container">
-            <div class="auth-form-wrapper">
 
-                <div class="auth-leaf">🌱</div>
+<main class="offline-container">
+    <div class="offline-card">
 
-                <p class="eyebrow">MINDBLOOM</p>
+        <div class="offline-logo" aria-hidden="true">🌱</div>
 
-                <h1>You're currently <span>offline.</span></h1>
+        <p class="eyebrow">MINDBLOOM</p>
 
-                <p class="auth-subtitle">
-                    It looks like your internet connection is unavailable.
-                    Please reconnect to continue using MindBloom.
-                </p>
+        <h1>You're currently <span>offline.</span></h1>
 
-                <p>
-                    Your wellbeing journey matters.
-                    Your private check-in information is not stored
-                    for offline access.
-                </p>
+        <p class="offline-description">
+            It looks like your internet connection is unavailable.
+            Take a moment for yourself. MindBloom will be ready
+            when your connection returns.
+        </p>
 
-                <button
-                    type="button"
-                    class="btn btn-primary auth-submit"
-                    onclick="window.location.reload()"
-                >
-                    Try again
-                </button>
-
-                <p class="auth-disclaimer">
-                    MindBloom is a support and monitoring tool and does
-                    not replace professional medical advice.
-                </p>
-
-            </div>
+        <div class="connection-status">
+            <span class="status-dot"></span>
+            <span id="connection-label">No internet connection</span>
         </div>
-    </main>
+
+        <!-- BREATHING EXERCISE -->
+        <section class="breathe-section"
+                 aria-label="Guided breathing exercise">
+
+            <h2 style="color:#294d3d; font-size:1.1rem;">
+                Take a mindful moment
+            </h2>
+
+            <p class="support-intro">
+                You can use this short breathing exercise
+                while you wait.
+            </p>
+
+            <div class="breathe-circle"
+                 id="breathe-circle"
+                 aria-hidden="true"></div>
+
+            <p class="breathe-label"
+               id="breathe-label"
+               aria-live="polite">
+                Breathe in...
+            </p>
+
+            <p class="breathe-hint">
+                Follow the circle gently. There is no need to force your breath.
+            </p>
+        </section>
+
+        <!-- SUPPORT CONTACTS -->
+        <section class="support-box"
+                 aria-labelledby="support-title">
+
+            <h2 id="support-title">
+                You're not alone 💚
+            </h2>
+
+            <p class="support-intro">
+                If you need someone to talk to, these organisations
+                provide support in Kenya.
+            </p>
+
+            <!-- EMERGENCY -->
+            <div class="support-card emergency-card">
+
+                <div class="support-name">
+                    Emergency services
+                </div>
+
+                <div class="support-description">
+                    For immediate danger or an emergency.
+                </div>
+
+                <div class="support-actions">
+                    <a class="support-link" href="tel:999">
+                        Call 999
+                    </a>
+
+                    <a class="support-link" href="tel:112">
+                        Call 112
+                    </a>
+                </div>
+            </div>
+
+            <!-- BEFRIENDERS -->
+            <div class="support-card">
+
+                <div class="support-name">
+                    Befrienders Kenya
+                </div>
+
+                <div class="support-description">
+                    Confidential emotional support and suicide prevention.
+                    Monday–Friday, 9 am–5 pm.
+                </div>
+
+                <div class="support-actions">
+                    <a class="support-link"
+                       href="tel:+254722178177">
+                        Call
+                    </a>
+
+                    <a class="support-link"
+                       href="sms:+254722178177">
+                        Send SMS
+                    </a>
+
+                    <a class="support-link"
+                       href="https://wa.me/254722178177"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        WhatsApp
+                    </a>
+
+                    <a class="support-link"
+                       href="https://lifeline-international.com/member/kenya/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Website
+                    </a>
+                </div>
+            </div>
+
+            <!-- KENYA RED CROSS -->
+            <div class="support-card">
+
+                <div class="support-name">
+                    Kenya Red Cross
+                </div>
+
+                <div class="support-description">
+                    Emergency and disaster response support.
+                </div>
+
+                <div class="support-actions">
+                    <a class="support-link" href="tel:1199">
+                        Call 1199
+                    </a>
+
+                    <a class="support-link"
+                       href="https://www.redcross.or.ke/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Website
+                    </a>
+                </div>
+            </div>
+
+            <!-- ONE2ONE -->
+            <div class="support-card">
+
+                <div class="support-name">
+                    One2One Kenya
+                </div>
+
+                <div class="support-description">
+                    Youth-focused counselling, information and referrals.
+                    Hotline: 8 am–10 pm daily.
+                </div>
+
+                <div class="support-actions">
+                    <a class="support-link" href="tel:1190">
+                        Call 1190
+                    </a>
+
+                    <a class="support-link"
+                       href="https://one2onekenya.org/help/call"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Website
+                    </a>
+                </div>
+            </div>
+
+            <!-- CHILDLINE -->
+            <div class="support-card">
+
+                <div class="support-name">
+                    Childline Kenya
+                </div>
+
+                <div class="support-description">
+                    Free, 24-hour support for children and young people.
+                </div>
+
+                <div class="support-actions">
+                    <a class="support-link" href="tel:116">
+                        Call 116
+                    </a>
+
+                    <a class="support-link"
+                       href="https://wa.me/254722116116"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        WhatsApp
+                    </a>
+
+                    <a class="support-link"
+                       href="https://childlinekenya.co.ke/contact-us.html"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Website
+                    </a>
+                </div>
+            </div>
+
+            <p class="support-note">
+                Website and WhatsApp links require internet access.
+                Phone and SMS links require a working mobile network.
+                Contact details and service hours may change.
+                These services do not replace your doctor or treatment team.
+            </p>
+
+        </section>
+
+        <!-- OFFLINE INFORMATION -->
+        <section class="offline-info">
+
+            <h3>What happens while you're offline?</h3>
+
+            <p>
+                Your MindBloom account and online features cannot
+                currently be accessed. Daily check-ins cannot be
+                submitted until your connection is restored.
+                This offline page does not save your check-in information.
+            </p>
+
+        </section>
+
+        <!-- ACTION BUTTONS -->
+        <div class="offline-buttons">
+
+            <button type="button"
+                    class="retry-button"
+                    id="retry-btn">
+                Check connection again
+            </button>
+
+            <a href="/"
+               class="home-button">
+                Return to MindBloom
+            </a>
+
+        </div>
+
+        <p class="retry-message"
+           id="retry-message"
+           aria-live="polite"></p>
+
+        <p class="auth-disclaimer">
+            MindBloom is a support and monitoring tool.
+            It does not replace professional medical advice,
+            diagnosis or treatment.
+        </p>
+
+    </div>
+</main>
+
+<script>
+
+    // Update the displayed connection status
+    function updateConnectionStatus() {
+
+        const label = document.getElementById("connection-label");
+
+        if (navigator.onLine) {
+            label.textContent = "Connection detected — checking website...";
+        } else {
+            label.textContent = "No internet connection";
+        }
+    }
+
+    // Check whether MindBloom can actually be reached
+    async function checkConnection() {
+
+        const button = document.getElementById("retry-btn");
+        const message = document.getElementById("retry-message");
+
+        button.disabled = true;
+        button.textContent = "Checking...";
+        message.textContent = "Trying to reconnect to MindBloom...";
+
+        try {
+
+            const response = await fetch("/", {
+                method: "HEAD",
+                cache: "no-store"
+            });
+
+            if (response.ok) {
+
+                message.textContent = "Connection restored! Redirecting...";
+
+                window.location.href = "/";
+
+            } else {
+
+                message.textContent =
+                    "MindBloom is not responding yet. Please try again.";
+
+                button.disabled = false;
+                button.textContent = "Try again";
+            }
+
+        } catch (error) {
+
+            message.textContent =
+                "Still offline. Please check your internet connection.";
+
+            button.disabled = false;
+            button.textContent = "Try again";
+        }
+    }
+
+    // Automatically redirect when internet returns
+    window.addEventListener("online", checkConnection);
+
+    window.addEventListener("offline", updateConnectionStatus);
+
+    // Retry button
+    document.getElementById("retry-btn")
+        .addEventListener("click", checkConnection);
+
+    // Breathing exercise
+    (function () {
+
+        const label = document.getElementById("breathe-label");
+
+        const reduceMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        if (reduceMotion) {
+
+            label.textContent = "Take a slow, gentle breath.";
+
+            return;
+        }
+
+        let breathingIn = true;
+
+        setInterval(function () {
+
+            breathingIn = !breathingIn;
+
+            label.textContent = breathingIn
+                ? "Breathe in..."
+                : "Breathe out...";
+
+        }, 4000);
+
+    })();
+
+    updateConnectionStatus();
+
+</script>
+
 </body>
 </html>
