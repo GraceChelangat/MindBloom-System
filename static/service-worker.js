@@ -1,4 +1,4 @@
-const CACHE_NAME = "mindbloom-static-v1";
+const CACHE_NAME = "mindbloom-static-v4";
 
 const STATIC_ASSETS = [
     "/static/css/style.css",
