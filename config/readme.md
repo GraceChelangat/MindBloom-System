@@ -1,6 +1,6 @@
 # 🌸 MindBloom System
 
-A web-based system for tracking mood and eating behaviours, and predicting relapse risk in anorexia nervosa among teenagers and young adults.
+A web-based system for tracking mood and eating behaviours, and flagging relapse risk in anorexia nervosa among teenagers and young adults.
 
 > **Disclaimer:** MindBloom is a support and monitoring tool, not a medical device. Its predictions are not a diagnosis and do not replace advice from a qualified healthcare professional. If you or someone you know is struggling, please contact a doctor, therapist, or local emergency services.
 
